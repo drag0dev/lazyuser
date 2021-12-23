@@ -1,5 +1,5 @@
 # Lazy user
-Lazy user is a small web application that tracks game prices using cheapshark API. Front end is written in vanilla HTML, CSS and JavaScript. Backend is an Node.js/Express API that is an interface for a Mongo database.
+Lazy user is a small web application that tracks game prices using cheapshark API. Front end is written in vanilla HTML, CSS and JavaScript. Backend is a Node.js/Express API that is an interface for a Mongo database.
 ## Database
 Database holds users email, username, password, token and followed games. Password is peppered, salted and hashed and then stored in database. Cookies are used to store JWT tokens which as of right now expire in 7 days.
 ## Things left to implement and or fix
