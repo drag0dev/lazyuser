@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png"/>
+    <link rel="stylesheet" href="css/lazy-style.css">
+
+    <title>Lazy user</title>
+</head>
+<body>
+
+    <div class="login-popup">
+        <div class="content">
+
+            <h1 class="login-h">Sign in</h1> 
+
+            <p class="message"></p>
+
+            <div class="input-field"><input placeholder="Username" class="username-input" type="text"></div>
+            <div class="input-field email-input-div"></div>
+            <div class="input-field"><input placeholder="Password" class="password-input" type="password"></div>
+            <button class="sign-in-button" style="cursor: pointer;">Sign in</button>
+
+            <p class="register-message">Don't have an account? <a class="register-redirect">Sign Up</a></p>
+
+        </div>
+    </div>
+
+    <nav>
+        <div class="title">
+            <a href="lazy-user.html"> 
+                <h4>
+                    Lazy user
+                </h4>
+            </a>
+        </div>
+        
+        <div class="login">
+            <p class="signin-press" style="cursor: pointer;">
+                Sign in
+            </p>
+
+            <p class="welcome-p"></p>
+            <p class="settings-p" style="cursor: pointer;"></p>
+            <p class="logout-p" style="cursor: pointer;"></p>
+
+            <p class="register-press" style="cursor: pointer;">
+                Sign up
+            </p>
+        </div>
+    </nav>
+    
+    <div class="search-div">
+        <label for="name">Enter a game name:</label>
+        <input type="text" id="name" class="game-name-box">
+        <input type="submit" class="submit-dugme" value="Go">
+    </div>
+
+    <div class="display-div"></div>
+
+    <div class="jump-div">
+        <p class="jump">Press me if you want to go to the top!</p>
+    </div>
+
+    <div class="display-detailed-div"></div>
+
+    <div class="footer-div">
+        <p>&copy; 2021 made by drag0dev</p>
+
+        <a href="https://www.github.com/drag0dev/" target="_blank" rel="noopener noreferrer">
+            <img src="img/github.png">
+        </a>
+
+        <a href="https://www.linkedin.com/in/dragoslav-tamindzija/" target="_blank" rel="noopener noreferrer">
+        <img src="img/linkedin.png">
+        </a>
+
+    </div>
+
+    <script src="js/lazy-main.js"></script>
+</body>
+</html>
