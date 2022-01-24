@@ -1,0 +1,23 @@
+$color_level_one: #0B0C10;
+$color_level_two: #1F2833;
+$color_level_three: #323c49;
+$color_level_four: #66FCF1;
+
+@mixin displayFLex {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navbar{
+    @include displayFLex();
+    color: $color_level_four;
+    background-color: $color_level_one;
+    height: 15vh;
+    .userInteractionNavBar{
+        @include displayFLex();
+        align-items: right;
+        width: 50%;
+
+    }
+}

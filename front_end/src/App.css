@@ -1,0 +1,29 @@
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  color: #66FCF1;
+  background-color: #0B0C10;
+  height: 15vh;
+}
+
+.navbar .userInteractionNavBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: right;
+      -ms-flex-align: right;
+          align-items: right;
+  width: 50%;
+}
+/*# sourceMappingURL=App.css.map */
