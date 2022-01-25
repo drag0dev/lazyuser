@@ -1,39 +1,18 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import URIs from '../ApiURIs';
-interface userInfoInterface{
-    username: string
-    logged: boolean
-}
+import { UserContext } from '../UserContext';
+import { userInfoContextType } from '../UserContext';
+import { userInfoInterface } from '../App';
 
 const Header = () => {
-    const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false});
-
-    const checkLogged = async() => {
-        let res = await fetch(URIs.urlCheckLogin, {
-            method: 'POST',
-            credentials: 'include'
-        });
-        
-        if(res.status==200){
-            let data;
-            data = await res.json();
-            setUserInfo({username: data.username, logged: true});
-        }
-    }  
-
-    useEffect(()=>{
-        checkLogged();
-    }, []);
-    
-
+    const {userInfo}: userInfoContextType = useContext(UserContext);
     return (
         <div className='navbar'>
             <h1 className='appTitle'>Lazy User</h1>
             <div className='userInteractionNavBar'>
                 {userInfo.logged && <div><p>{`Welcome, ${userInfo.username}`}</p></div>}
                 {userInfo.logged && <div><a>Settings</a></div>}
-                {userInfo.logged ? <div><a>Log out</a></div>: <div><a>Log in</a></div>}
+                {userInfo.logged ? <div><a>Log out</a></div>: <div><a>Log in</a> <a>Register</a></div>}
             </div>
         </div>
     )

@@ -9,6 +9,18 @@ $color_level_four: #66FCF1;
     justify-content: space-around;
 }
 
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    font-size: 2vw;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
 .navbar{
     @include displayFLex();
     color: $color_level_four;
@@ -20,4 +32,30 @@ $color_level_four: #66FCF1;
         width: 50%;
 
     }
+}
+
+.login-form{
+    width: 100%;
+    height: 50vh;
+    background-color: $color_level_three;
+    color: $color_level_four;
+    @include displayFLex();
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    div ,p ,h1{
+        width: 100%;
+    }
+
+    button{
+        background-color: $color_level_two;
+        color: whitesmoke;
+        border: 2px solid $color_level_one;
+    }
+    input{
+        background-color: $color_level_two;
+        color: whitesmoke;
+        border: 2px solid $color_level_one;
+    }
+
 }
