@@ -35,14 +35,15 @@ function App() {
   }, []);
 
 
+  // TODO: prevent access to login page when user is logged in
+
   return (
     <div className="App">
       <UserContext.Provider value = {{userInfo: userInfo, setUserInfo: setUserInfo}} >
         <Header />
 
         <Routes>
-
-          <Route path='/' element={<LoginPage/>}/>
+          <Route path='/login' element={<LoginPage />}/>
 
         </Routes>
 

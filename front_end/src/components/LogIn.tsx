@@ -1,31 +1,42 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import URIs from '../ApiURIs';
 import { userInfoInterface } from '../App';
 import { userInfoContextType } from '../UserContext';
 import { UserContext } from '../UserContext';
 
 const LogIn = () => {
-    const messageP = useRef('');
-    const usernameInput = useRef('');
-    const passwordInput = useRef('');
     const userInfo:userInfoContextType = useContext(UserContext);
 
+    let [loginMessage, setLoginMessage] = useState('');
+    let [enteredUsername, setEnteredUsername] = useState('');
+    let [enteredPassword, setEnteredPassword] = useState('');
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(userInfo.userInfo.logged)navigate('/');
+    }, [userInfo.userInfo.logged]);
+
     const loginOnClick = async () => {
-        let username = usernameInput.current;
-        let password = passwordInput.current;
-        messageP.current = '';
-        if(!username){
-            messageP.current = 'You need to enter a username!';
+        let username = enteredUsername;
+        let password = enteredPassword;
+
+        if (!username){
+            setLoginMessage('You need to enter a username!');
             return;
         }
-        if(!password){
-            messageP.current = 'You need to enter a password!';
-            return;
+        if (!password){
+            setLoginMessage('You need to enter a password!');
         }
 
-        let res = await fetch(URIs.urlCheckLogin, {
+        let res = await fetch(URIs.urlLogin, {
             method: 'POST',
-            credentials: 'include'
+            credentials: 'include',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({username: username, password: password})
         });
 
         if(res.status == 200){
@@ -33,7 +44,7 @@ const LogIn = () => {
             userInfo.setUserInfo({username: data.username, logged: true});
         }
         else{
-            messageP.current = 'Incorrect credintials!';
+            setLoginMessage('Incorrect credentials!');
         }
 
     };
@@ -42,14 +53,14 @@ const LogIn = () => {
             <div className='login-form'>
                 <h1 className="login-h">Sign in</h1> 
 
-                <p className="message" ref={messageP}></p>
+                <p className="message">{loginMessage}</p>
 
                 <div className="input-field">
-                    <input ref={usernameInput} placeholder="Username"  className="username-input" type="text" />
+                    <input placeholder="Username"  className="username-input" type="text" value={enteredUsername} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredUsername(e.currentTarget.value)}}/>
                 </div>
 
                 <div className="input-field">
-                    <input placeholder="Password" ref={passwordInput} className="password-input" type="password"/>
+                    <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>
                 </div>
 
                 <button className="sign-in-button" onClick={loginOnClick}>Sign in</button>

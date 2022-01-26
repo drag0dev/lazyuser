@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
-import URIs from '../ApiURIs';
 import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../UserContext';
 import { userInfoInterface } from '../App';
+
+    // TODO: wait for checkLogin to finish then render
 
 const Header = () => {
     const {userInfo}: userInfoContextType = useContext(UserContext);
