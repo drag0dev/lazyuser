@@ -1,12 +1,16 @@
 import React, {createContext, useEffect, useState} from 'react';
 import { Routes, Route} from 'react-router-dom';
+import { UserContext } from './UserContext';
+import { userInfoContextType } from './UserContext';
+
 import './App.css';
+import URIs from './ApiURIs';
+
 import Header from './components/Header';
 import LogIn from './components/LogIn';
 import LoginPage from './pages/LoginPage';
-import URIs from './ApiURIs';
-import { UserContext } from './UserContext';
-import { userInfoContextType } from './UserContext';
+import Footer from './components/Footer';
+
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -44,9 +48,10 @@ function App() {
 
         <Routes>
           <Route path='/login' element={<LoginPage />}/>
-
+          <Route path='/'/>
         </Routes>
 
+        <Footer />
       </UserContext.Provider>
     </div>
   );

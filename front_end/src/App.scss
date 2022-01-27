@@ -59,3 +59,13 @@ html{
     }
 
 }
+
+.footer{
+    @include displayFLex();
+    height: 5vh;
+    background-color: $color_level_two;
+    justify-content: center;
+    * {
+        margin-left: 1vw;
+    }
+}

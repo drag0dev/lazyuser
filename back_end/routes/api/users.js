@@ -132,7 +132,7 @@ router.post('/login', async (req,res)=>{
                 return;
             }
         });
-        res.status(200).send();
+        res.status(200).send({username: userOld.username});
         return;
     }
     else{
