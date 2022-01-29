@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
 import { UserContext } from './UserContext';
 import { userInfoContextType } from './UserContext';
@@ -11,6 +11,7 @@ import LogIn from './components/LogIn';
 import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
 import Register from './components/Register';
+import { create } from 'domain';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -20,8 +21,10 @@ export interface userInfoInterface{
 
 function App() {
   const [userInfo, setUserInfo] = useState({username: '', logged: false});
+  const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
 
   const checkLogged = async() => {
+    setloginCheckState(true);
     let res = await fetch(URIs.urlCheckLogin, {
         method: 'POST',
         credentials: 'include'
@@ -32,19 +35,17 @@ function App() {
         data = await res.json();
         setUserInfo({username: data.username, logged: true});
     }
+    setloginCheckState(false);
   }  
 
   useEffect(()=>{
       checkLogged();
   }, []);
 
-
-  // TODO: prevent access to login page when user is logged in
-
   return (
     <div className="App">
       <UserContext.Provider value = {{userInfo: userInfo, setUserInfo: setUserInfo}} >
-        <Header />
+        <Header state={loginCheckState}/>
 
         <Routes>
           <Route path='/'/>

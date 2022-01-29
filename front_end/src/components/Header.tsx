@@ -1,20 +1,35 @@
-import React, {useContext} from 'react';
+import React, { useContext} from 'react';
 import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../UserContext';
 import { userInfoInterface } from '../App';
+import { Link } from 'react-router-dom';
+import URIs from '../ApiURIs';
+interface headerStateProp{
+    state: boolean;
+  }
 
-    // TODO: wait for checkLogin to finish then render
-
-const Header = () => {
-    const {userInfo}: userInfoContextType = useContext(UserContext);
+const Header = ({state}: headerStateProp) => {
+    const {userInfo, setUserInfo} = useContext(UserContext);
+    const onClickLogOut = async () => {
+        let res = await fetch(URIs.urlLogout, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        if(res.status == 200)setUserInfo({username: '',logged: false });
+    }
     return (
         <div className='navbar'>
-            <h1 className='appTitle'>Lazy User</h1>
-            <div className='userInteractionNavBar'>
+            <Link to='/'><h1 className='appTitle'>Lazy User</h1></Link>
+            {!state &&  // to prevent rendering as if user is not logged in while the session is being checked
+                <div className='userInteractionNavBar'>
                 {userInfo.logged && <div><p>{`Welcome, ${userInfo.username}`}</p></div>}
                 {userInfo.logged && <div><a>Settings</a></div>}
-                {userInfo.logged ? <div><a>Log out</a></div>: <div><a>Log in</a> <a>Register</a></div>}
-            </div>
+                {userInfo.logged && <div><p className='logOutButton' onClick={onClickLogOut}>Log out</p></div>}
+                {!userInfo.logged && <div><Link to='/login'>Log in</Link></div> }
+                {!userInfo.logged && <div><Link to='/register'>Register</Link></div> }
+                </div>
+            }
+            
         </div>
     )
 }

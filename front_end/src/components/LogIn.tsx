@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import URIs from '../ApiURIs';
 import { userInfoInterface } from '../App';
 import { userInfoContextType } from '../UserContext';
@@ -66,7 +66,7 @@ const LogIn = () => {
                 <button className="sign-in-button" onClick={loginOnClick}>Sign in</button>
 
                 <div className='register-message-div'>
-                    <p className="register-message">Don't have an account? <a className="register-redirect">Sign Up</a></p>
+                    <p className="register-message">Don't have an account? <Link to='/register'>Sign Up</Link></p>
                 </div>
                 
             </div>

@@ -34,10 +34,15 @@ html {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  -webkit-box-align: right;
-      -ms-flex-align: right;
-          align-items: right;
+  align-items: center;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
   width: 50%;
+}
+
+.navbar .userInteractionNavBar div {
+  margin-left: 2vw;
 }
 
 .login-form, .register-form {
@@ -96,5 +101,13 @@ html {
 
 .footer * {
   margin-left: 1vw;
+}
+
+a:hover, .logOutButton:hover {
+  color: #323c49;
+}
+
+a:focus, a, a:active {
+  color: inherit;
 }
 /*# sourceMappingURL=App.css.map */

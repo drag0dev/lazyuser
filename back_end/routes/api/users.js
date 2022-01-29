@@ -28,7 +28,7 @@ router.post('/checklogin', auth, (req, res)=>{
     });
 });
 
-// @route   POST api/user/checklogin
+// @route   GET api/user/checklogin
 // @desc    Check if jwt has expired
 router.get('/logout', auth, (req, res)=>{
     res.clearCookie('access_token', {
