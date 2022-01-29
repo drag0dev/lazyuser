@@ -10,7 +10,7 @@ import Header from './components/Header';
 import LogIn from './components/LogIn';
 import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
-
+import Register from './components/Register';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -47,8 +47,9 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path='/login' element={<LoginPage />}/>
           <Route path='/'/>
+          <Route path='/login' element={<LoginPage />}/>
+          <Route path='/register' element={<Register />} />
         </Routes>
 
         <Footer />

@@ -40,7 +40,7 @@ html {
   width: 50%;
 }
 
-.login-form {
+.login-form, .register-form {
   width: 100%;
   height: 50vh;
   background-color: #323c49;
@@ -62,17 +62,17 @@ html {
           flex-direction: row;
 }
 
-.login-form div, .login-form p, .login-form h1 {
+.login-form div, .login-form p, .login-form h1, .register-form div, .register-form p, .register-form h1 {
   width: 100%;
 }
 
-.login-form button {
+.login-form button, .register-form button {
   background-color: #1F2833;
   color: whitesmoke;
   border: 2px solid #0B0C10;
 }
 
-.login-form input {
+.login-form input, .register-form input {
   background-color: #1F2833;
   color: whitesmoke;
   border: 2px solid #0B0C10;
