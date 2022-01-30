@@ -4,14 +4,14 @@ import { UserContext } from './UserContext';
 import { userInfoContextType } from './UserContext';
 
 import './App.css';
-import URIs from './ApiURIs';
+import URLs from './ApiURLs';
 
 import Header from './components/Header';
 import LogIn from './components/LogIn';
 import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
 import Register from './components/Register';
-import { create } from 'domain';
+import Search from './components/Search';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -25,7 +25,7 @@ function App() {
 
   const checkLogged = async() => {
     setloginCheckState(true);
-    let res = await fetch(URIs.urlCheckLogin, {
+    let res = await fetch(URLs.urlCheckLogin, {
         method: 'POST',
         credentials: 'include'
     });
@@ -48,7 +48,7 @@ function App() {
         <Header state={loginCheckState}/>
 
         <Routes>
-          <Route path='/'/>
+          <Route path='/' element={<Search />}/>
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />} />
         </Routes>

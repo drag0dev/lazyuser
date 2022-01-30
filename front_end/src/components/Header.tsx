@@ -3,7 +3,7 @@ import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../UserContext';
 import { userInfoInterface } from '../App';
 import { Link } from 'react-router-dom';
-import URIs from '../ApiURIs';
+import URLs from '../ApiURLs';
 interface headerStateProp{
     state: boolean;
   }
@@ -11,7 +11,7 @@ interface headerStateProp{
 const Header = ({state}: headerStateProp) => {
     const {userInfo, setUserInfo} = useContext(UserContext);
     const onClickLogOut = async () => {
-        let res = await fetch(URIs.urlLogout, {
+        let res = await fetch(URLs.urlLogout, {
             method: 'GET',
             credentials: 'include'
         });

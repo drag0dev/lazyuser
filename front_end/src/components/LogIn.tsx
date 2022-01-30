@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import URIs from '../ApiURIs';
+import URLs from '../ApiURLs';
 import { userInfoInterface } from '../App';
 import { userInfoContextType } from '../UserContext';
 import { UserContext } from '../UserContext';
@@ -30,7 +30,7 @@ const LogIn = () => {
             setLoginMessage('You need to enter a password!');
         }
 
-        let res = await fetch(URIs.urlLogin, {
+        let res = await fetch(URLs.urlLogin, {
             method: 'POST',
             credentials: 'include',
             headers: {

@@ -14,4 +14,4 @@ yarn-error.log*
 
 
 /src/App.css.map
-/src/ApiURIs.tsx
+/src/ApiURLs.tsx

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import URIs from '../ApiURIs';
+import URLs from '../ApiURLs';
 import { userInfoContextType } from '../UserContext';
 import { UserContext } from '../UserContext';
 
@@ -62,7 +62,7 @@ const Register = () => {
         if(!validatePassword(enteredPassword))return;
         if(!validateEmail(enteredEmail))return;
 
-        const res = await fetch(URIs.urlRegister, {
+        const res = await fetch(URLs.urlRegister, {
             method: 'POST',
             credentials: 'include',
             headers: {

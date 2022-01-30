@@ -5,7 +5,7 @@ html {
 
 * {
   margin: 0;
-  font-size: 2vw;
+  font-size: 1.5vw;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-decoration: none;
@@ -73,13 +73,13 @@ html {
 
 .login-form button, .register-form button {
   background-color: #1F2833;
-  color: whitesmoke;
+  color: #C5C6C7;
   border: 2px solid #0B0C10;
 }
 
 .login-form input, .register-form input {
   background-color: #1F2833;
-  color: whitesmoke;
+  color: #C5C6C7;
   border: 2px solid #0B0C10;
 }
 
@@ -109,5 +109,76 @@ a:hover, .logOutButton:hover {
 
 a:focus, a, a:active {
   color: inherit;
+}
+
+.search-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  background-color: #1F2833;
+  color: #C5C6C7;
+  height: 10vh;
+}
+
+.search-div input {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.search-div .game-name-box {
+  margin-left: 2vw;
+  margin-right: 2vw;
+  min-width: 30vw;
+  text-align: center;
+  background-color: #1F2833;
+  color: #66FCF1;
+  border-color: #C5C6C7;
+}
+
+.results-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  background-color: #323c49;
+  min-height: 25vh;
+  color: #C5C6C7;
+}
+
+.results-div div {
+  margin-bottom: 2vh;
+  margin-top: 1vh;
+  width: 33%;
+}
+
+.results-div img {
+  width: 15vw;
+  height: auto;
 }
 /*# sourceMappingURL=App.css.map */
