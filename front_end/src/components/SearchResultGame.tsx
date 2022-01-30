@@ -3,7 +3,7 @@ import React from 'react';
 export interface SearchResultInerface{
     name: string,
     cheapestPrice: string,
-    imageURL: string
+    imageURL: string,
 }
 
 const SearchResultGame = ({name, cheapestPrice, imageURL}:SearchResultInerface) => {

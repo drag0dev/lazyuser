@@ -150,6 +150,13 @@ a:focus, a, a:active {
   border-color: #C5C6C7;
 }
 
+.search-div .submit-dugme {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+  text-align: center;
+  min-width: 10vw;
+}
+
 .results-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -180,5 +187,30 @@ a:focus, a, a:active {
 .results-div img {
   width: 15vw;
   height: auto;
+}
+
+.jump-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  background-color: #0B0C10;
+  text-align: center;
+  height: 5vh;
+  color: #C5C6C7;
+}
+
+.jump-div button {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+  text-align: center;
+  min-width: 10vw;
 }
 /*# sourceMappingURL=App.css.map */

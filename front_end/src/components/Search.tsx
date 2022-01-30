@@ -38,6 +38,7 @@ const Search = () => {
                     name={game.external}
                     cheapestPrice={game.cheapest}
                     imageURL={game.thumb}
+                    key={game.gameID}
                     />
                 ))}
             </div>

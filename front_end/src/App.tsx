@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
 import Register from './components/Register';
 import Search from './components/Search';
+import JumpDiv from './components/JumpDiv';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -52,7 +53,7 @@ function App() {
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />} />
         </Routes>
-
+        <JumpDiv />
         <Footer />
       </UserContext.Provider>
     </div>

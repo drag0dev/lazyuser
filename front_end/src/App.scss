@@ -10,6 +10,13 @@ $color_text: #C5C6C7;
     justify-content: space-around;
 }
 
+@mixin button {
+    background-color: $color_level_one;
+    color: $color_text;
+    text-align: center;
+    min-width: 10vw;
+}
+
 html{
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -104,6 +111,9 @@ a:focus, a, a:active{
         color: $color_level_four;
         border-color: $color_text;
     }
+    .submit-dugme{
+        @include button();
+    }
 }
 
 .results-div{
@@ -122,5 +132,17 @@ a:focus, a, a:active{
     img{
         width: 15vw;
         height: auto;
+    }
+}
+
+.jump-div{
+    @include displayFLex();
+    justify-content: space-evenly;
+    background-color: $color_level_one;
+    text-align: center;
+    height: 5vh;
+    color: $color_text;
+    button{
+        @include button();
     }
 }
