@@ -75,7 +75,8 @@ html{
 .footer{
     @include displayFLex();
     height: 5vh;
-    background-color: $color_level_two;
+    background-color: $color_level_one;
+    color: $color_text;
     justify-content: center;
     * {
         margin-left: 1vw;
@@ -144,5 +145,41 @@ a:focus, a, a:active{
     color: $color_text;
     button{
         @include button();
+    }
+}
+
+.detailed-game-div{
+    @include displayFLex();
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: center;
+    background-color: $color_level_two;
+    color: $color_text;
+    min-height: 41vh;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    .big-image{
+        padding-left: 2.5vw;
+        padding-right: 2.5vw;
+        min-width: 20%;
+        max-width: 35%;
+        height: auto;
+    }
+    button{
+        @include button();
+    }
+    .deals-div{
+        @include displayFLex();
+        flex-wrap: wrap;
+        flex-direction: row;
+        text-align: center;
+        background-color: $color_level_two;
+        color: $color_text;
+        width: 100%;
+        padding-top: 3vh;
+        padding-bottom: 3vh;
+        a{
+            width: 25%;
+        }
     }
 }

@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Register from './components/Register';
 import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
+import DetailedGame from './components/DetailedGame';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -20,9 +21,15 @@ export interface userInfoInterface{
   email?: string  // TODO: make api endpoint for changing user info
 }
 
+export interface DeatiledGameInterface{
+  gameId: string,
+  setGameId: Function
+}
+
 function App() {
   const [userInfo, setUserInfo] = useState({username: '', logged: false});
   const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
+  const [gameId, setGameId] = useState('');
 
   const checkLogged = async() => {
     setloginCheckState(true);
@@ -49,11 +56,10 @@ function App() {
         <Header state={loginCheckState}/>
 
         <Routes>
-          <Route path='/' element={<Search />}/>
+          <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId}/> <JumpDiv /> <DetailedGame gameId={gameId} setGameId={setGameId}/> </>}/>
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />} />
         </Routes>
-        <JumpDiv />
         <Footer />
       </UserContext.Provider>
     </div>

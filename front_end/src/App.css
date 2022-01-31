@@ -93,7 +93,8 @@ html {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   height: 5vh;
-  background-color: #1F2833;
+  background-color: #0B0C10;
+  color: #C5C6C7;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -212,5 +213,70 @@ a:focus, a, a:active {
   color: #C5C6C7;
   text-align: center;
   min-width: 10vw;
+}
+
+.detailed-game-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  background-color: #1F2833;
+  color: #C5C6C7;
+  min-height: 41vh;
+  padding-top: 2.5vh;
+  padding-bottom: 2.5vh;
+}
+
+.detailed-game-div .big-image {
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  min-width: 20%;
+  max-width: 35%;
+  height: auto;
+}
+
+.detailed-game-div button {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+  text-align: center;
+  min-width: 10vw;
+}
+
+.detailed-game-div .deals-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  background-color: #1F2833;
+  color: #C5C6C7;
+  width: 100%;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.detailed-game-div .deals-div a {
+  width: 25%;
 }
 /*# sourceMappingURL=App.css.map */
