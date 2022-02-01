@@ -278,5 +278,6 @@ a:focus, a, a:active {
 
 .detailed-game-div .deals-div a {
   width: 25%;
+  margin-top: 1vh;
 }
 /*# sourceMappingURL=App.css.map */

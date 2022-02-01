@@ -79,7 +79,6 @@ const DetailedGame = ({gameId}: DeatiledGameInterface) =>{
 
     useEffect(()=>{
         if(gameId == '')return;
-        console.log(storesInfo);
         getGame();
         detailDivRef.current?.scrollIntoView();
     }, [gameId]);
@@ -99,12 +98,12 @@ const DetailedGame = ({gameId}: DeatiledGameInterface) =>{
                     <button className={`follow-button`}>Follow</button>
 
                     <div className='deals-div'>
-                        {detailedGameInfo.deals.map((deal)=>(
+                        {detailedGameInfo.deals.map((deal, index)=>(
                             <a href={CheapSharkURLs.deal.replace('placeholder', deal.dealID)} target='_blank' key={deal.dealID}>
                             <br/>
-                            <img src={storesInfo[parseInt(deal.storeID)-1].images.icon}></img>
+                            <img src={CheapSharkURLs.default + storesInfo[index].images.icon}></img>
                             <br/>
-                            <p>{storesInfo[parseInt(deal.storeID)-1].images.icon}</p>
+                            <p>{storesInfo[index].storeName}</p>
                             <br />
                             <p>{`Discount: ${parseInt(deal.savings).toFixed(0)}%`}</p>
                             <br />

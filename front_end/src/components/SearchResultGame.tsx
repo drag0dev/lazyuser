@@ -18,7 +18,7 @@ const SearchResultGame = ({name, cheapestPrice, imageURL, gameId, setGameId}:Sea
         <div className='game-search-result' onClick={gameOnClick}>
             <img src={imageURL}/>
             <p>{`Name: ${name}`}</p>
-            <p>{`Cheapest: ${cheapestPrice}`}</p>
+            <p>{`Cheapest: $${cheapestPrice}`}</p>
         </div>
     );
 }
