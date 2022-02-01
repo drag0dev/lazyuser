@@ -9,6 +9,7 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar {
@@ -22,7 +23,7 @@ html {
       justify-content: space-around;
   color: #66FCF1;
   background-color: #0B0C10;
-  height: 15vh;
+  height: 14vh;
 }
 
 .navbar .userInteractionNavBar {
@@ -216,6 +217,7 @@ a:focus, a, a:active {
 }
 
 .detailed-game-div {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -226,24 +228,16 @@ a:focus, a, a:active {
       justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-align: center;
   background-color: #1F2833;
   color: #C5C6C7;
   min-height: 41vh;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
-}
-
-.detailed-game-div .big-image {
-  padding-left: 2.5vw;
-  padding-right: 2.5vw;
-  min-width: 20%;
-  max-width: 35%;
-  height: auto;
 }
 
 .detailed-game-div button {
@@ -279,5 +273,39 @@ a:focus, a, a:active {
 .detailed-game-div .deals-div a {
   width: 25%;
   margin-top: 1vh;
+}
+
+.detailed-game-div .detailed-games {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.detailed-game-div .detailed-games .big-image {
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  min-width: 20%;
+  max-width: 35%;
+  height: auto;
+}
+
+hr {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 100%;
+  margin-bottom: 2.5vh;
 }
 /*# sourceMappingURL=App.css.map */

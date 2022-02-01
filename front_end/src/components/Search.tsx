@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SearchResultInerface } from './SearchResultGame';
 import CheapSharkURLs from '../CheapSharkURLs';
 import SearchResultGame from './SearchResultGame';
-import { DeatiledGameInterface } from '../App';
+import { DetailedGameInterface } from '../App';
 
 interface gamesSerachResultJSON{
     gameID: string,
@@ -14,7 +14,7 @@ interface gamesSerachResultJSON{
     thumb : string
 }
 
-const Search = ({gameId, setGameId}: DeatiledGameInterface) => {
+const Search = ({gameId, setGameId}: DetailedGameInterface) => {
     const [searchString, setSearchString] = useState('');
     const [results, setResults] = useState ([]);
 

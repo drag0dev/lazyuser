@@ -14,22 +14,23 @@ import Register from './components/Register';
 import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
 import DetailedGame from './components/DetailedGame';
+import CheapSharkURLs from './CheapSharkURLs';
 export interface userInfoInterface{
   username: string
   logged: boolean
-  games?: string[]
+  games: string[]
   email?: string  // TODO: make api endpoint for changing user info
 }
 
-export interface DeatiledGameInterface{
-  gameId: string,
+export interface DetailedGameInterface{
+  gameId: string[],
   setGameId: Function
 }
 
 function App() {
-  const [userInfo, setUserInfo] = useState({username: '', logged: false});
+  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: []});
   const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
-  const [gameId, setGameId] = useState('');
+  const [gameId, setGameId] = useState([]);
 
   const checkLogged = async() => {
     setloginCheckState(true);
@@ -41,14 +42,44 @@ function App() {
     if(res.status==200){
         let data;
         data = await res.json();
-        setUserInfo({username: data.username, logged: true});
+        setUserInfo({username: data.username, logged: true, games: []});
     }
     setloginCheckState(false);
   }  
 
+  const getUserGames = async () => {
+    let res = await fetch(URLs.urlGames, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({username: userInfo.username})
+    });
+
+    if(res.status==200){
+      let data = await res.json();
+      setUserInfo({username: userInfo.username, logged: true, games: data});
+    }
+    else{
+      setUserInfo({username: userInfo.username, logged: true, games: []});
+    }
+  }
+
   useEffect(()=>{
       checkLogged();
   }, []);
+
+  const emptyGameArray = async () =>{
+    await setGameId([]);
+  }
+
+  useEffect(() => {
+    emptyGameArray();
+    // if user is logged grab games
+    if(userInfo.logged) getUserGames();
+
+  }, [userInfo.logged]);
 
   return (
     <div className="App">
@@ -56,7 +87,10 @@ function App() {
         <Header state={loginCheckState}/>
 
         <Routes>
-          <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId}/> <JumpDiv /> <DetailedGame gameId={gameId} setGameId={setGameId}/> </>}/>
+          <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId}/> 
+                                      <JumpDiv gameId={gameId} setGameId={setGameId}/>
+                                      <DetailedGame gameId={gameId} setGameId={setGameId}/> </>}
+          />
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />} />
         </Routes>

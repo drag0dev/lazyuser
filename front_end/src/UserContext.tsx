@@ -5,7 +5,7 @@ export type userInfoContextType = {
     setUserInfo: Function
 }
 
-const defaultUserInfo: userInfoInterface = {username: '', logged: true};
+const defaultUserInfo: userInfoInterface = {username: '', logged: true, games: []};
 const defaultFunction: Function = () => {};
 
 export const UserContext = createContext<userInfoContextType>({userInfo: defaultUserInfo, setUserInfo: defaultFunction});

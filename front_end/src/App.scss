@@ -27,13 +27,14 @@ html{
     font-size: 1.5vw;
     box-sizing: border-box;
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .navbar{
     @include displayFLex();
     color: $color_level_four;
     background-color: $color_level_one;
-    height: 15vh;
+    height: 14vh;
     .userInteractionNavBar{
         @include displayFLex();
         align-items: center;
@@ -149,25 +150,21 @@ a:focus, a, a:active{
 }
 
 .detailed-game-div{
+    width: 100%;
     @include displayFLex();
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     text-align: center;
     background-color: $color_level_two;
     color: $color_text;
     min-height: 41vh;
     padding-top: 2.5vh;
     padding-bottom: 2.5vh;
-    .big-image{
-        padding-left: 2.5vw;
-        padding-right: 2.5vw;
-        min-width: 20%;
-        max-width: 35%;
-        height: auto;
-    }
+
     button{
         @include button();
     }
+
     .deals-div{
         @include displayFLex();
         flex-wrap: wrap;
@@ -183,4 +180,26 @@ a:focus, a, a:active{
             margin-top: 1vh;
         }
     }
+
+    .detailed-games{
+        @include displayFLex();
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        .big-image{
+            padding-left: 2.5vw;
+            padding-right: 2.5vw;
+            min-width: 20%;
+            max-width: 35%;
+            height: auto;
+        }
+    } 
+
+    
+}
+
+hr{
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 2.5vh;
 }

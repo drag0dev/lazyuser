@@ -11,7 +11,8 @@ export interface SearchResultInerface{
 const SearchResultGame = ({name, cheapestPrice, imageURL, gameId, setGameId}:SearchResultInerface) => {
 
     const gameOnClick = () => {
-        setGameId(gameId);
+        setGameId([[]]);
+        setGameId([gameId]);
     }
 
     return(
