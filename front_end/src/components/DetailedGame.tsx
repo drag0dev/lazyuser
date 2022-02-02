@@ -1,9 +1,10 @@
 import { userInfo } from 'os';
 import React, {useEffect, useState, useRef, useContext} from 'react';
-import { forEachTrailingCommentRange, getJSDocAugmentsTag } from 'typescript';
+import { createThis, forEachTrailingCommentRange, getJSDocAugmentsTag } from 'typescript';
 import { DetailedGameInterface } from '../App';
 import CheapSharkURLs from '../CheapSharkURLs';
 import { UserContext, userInfoContextType } from '../UserContext';
+import URLs from '../ApiURLs';
 
 interface storesInfoInterface{
     storeID: string,
@@ -37,7 +38,7 @@ interface gameInfoInterface{
     ]
 }
 
-const DetailedGame = ({gameId, setGameId}: DetailedGameInterface) =>{
+const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) =>{
     const detailDivRef = useRef<HTMLDivElement>(null);
 
     const userInfo: userInfoContextType = useContext(UserContext);
@@ -45,6 +46,67 @@ const DetailedGame = ({gameId, setGameId}: DetailedGameInterface) =>{
     const [storesInfo, setStoresInfo] = useState<storesInfoInterface[]>([]);
 
     const [detailedGamesInfo, setDetailedGameInfo] = useState<gameInfoInterface[]>([]);
+
+    const handleFollowServerSide = async (clickedId: string, follow: boolean = true) => {
+        if(follow){
+            let res = await fetch(URLs.urlAddGame, {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({username: userInfo.userInfo.username, gameName: clickedId})
+            });
+
+            if (res.status == 200){ // add the game to the tracked games on front end
+                let newArray = userInfo.userInfo.games;
+                let newUserInfo = userInfo.userInfo;
+                newArray.push(clickedId);
+                newUserInfo.games = newArray;
+                userInfo.setUserInfo(newUserInfo);
+                getUserGames();
+            }
+        
+        }else {
+            let res = await fetch(URLs.urlDelGame, {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({username: userInfo.userInfo.username, gameName: clickedId})
+            });
+            if(res.status == 200){ // remove the game from the tracked on front end
+                let newArray = userInfo.userInfo.games;
+                let newUserInfo = userInfo.userInfo;
+                let index: number = newArray.indexOf(clickedId);
+                if (index > -1) newArray.splice(index, 1); // remove the gameId
+                newUserInfo.games = newArray;
+                userInfo.setUserInfo(newUserInfo);
+                getUserGames();
+
+                // if the game is currently displayed remove it
+                index = gameId.indexOf(clickedId);
+                if(index > -1){
+                    let newGameIdArray = [...gameId];
+                    newGameIdArray.splice(index, 1);
+                    console.log(gameId, newGameIdArray);
+                    setGameId(newGameIdArray);
+                } 
+            }
+        }
+    }
+
+    const followOnClick = (e:React.MouseEvent<HTMLElement>) => {
+        const className = e.currentTarget.className.split('-')[2];
+
+        if (userInfo.userInfo.games.includes(className)){ // if game is followed  
+            handleFollowServerSide(className, false);
+        }
+        else{ // if game is to be followed
+            handleFollowServerSide(className, true);
+        }
+    }
 
     const getStores = async () =>{
         const res = await fetch(CheapSharkURLs.store);
@@ -97,7 +159,7 @@ const DetailedGame = ({gameId, setGameId}: DetailedGameInterface) =>{
                         Cheapest: ${game.cheapestPriceEver.price} ({game.cheapestPriceEver.date}.)
                     </p>
 
-                    <button className={`follow-button`} key={`follow-button-${game.info.title}`}>{userInfo.userInfo.games?.includes(gameId[index]) ? 'Unfollow' : 'Follow'}</button>
+                    <button onClick={(e: React.MouseEvent<HTMLElement>) => followOnClick(e)} className={`follow-button-${gameId[index]}`} key={`follow-button-${game.info.title}`}>{userInfo.userInfo.games?.includes(gameId[index]) ? 'Unfollow' : 'Follow'}</button>
 
                     <div className='deals-div' key={`game-${index}`}>
                         {game.deals.map((deal)=>(

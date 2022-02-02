@@ -14,7 +14,6 @@ import Register from './components/Register';
 import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
 import DetailedGame from './components/DetailedGame';
-import CheapSharkURLs from './CheapSharkURLs';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -24,7 +23,8 @@ export interface userInfoInterface{
 
 export interface DetailedGameInterface{
   gameId: string[],
-  setGameId: Function
+  setGameId: Function,
+  getUserGames: Function
 }
 
 function App() {
@@ -87,9 +87,9 @@ function App() {
         <Header state={loginCheckState}/>
 
         <Routes>
-          <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId}/> 
-                                      <JumpDiv gameId={gameId} setGameId={setGameId}/>
-                                      <DetailedGame gameId={gameId} setGameId={setGameId}/> </>}
+          <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId} getUserGames={getUserGames}/> 
+                                      <JumpDiv gameId={gameId} setGameId={setGameId} getUserGames={getUserGames}/>
+                                      <DetailedGame gameId={gameId} setGameId={setGameId} getUserGames={getUserGames} /> </>}
           />
           <Route path='/login' element={<LoginPage />}/>
           <Route path='/register' element={<Register />} />
