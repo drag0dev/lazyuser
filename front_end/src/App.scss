@@ -47,17 +47,27 @@ html{
 }
 
 
-.login-form, .register-form{
+.form-wrapper-div{
     width: 100%;
-    height: 50vh;
+    height: 81vh;
     background-color: $color_level_three;
     color: $color_level_four;
     @include displayFLex();
-    text-align: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    div ,p ,h1{
-        width: 100%;
+
+    .login-form, .register-form{
+        @include displayFLex();
+        justify-self: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+
+        height: 50%;
+        div ,p ,h1{
+            width: 100%;
+            @include displayFLex();
+        }
+        p{
+          justify-content: center;
+        }
     }
 
     button{
@@ -202,4 +212,23 @@ hr{
     flex-grow: 1;
     width: 100%;
     margin-bottom: 2.5vh;
+}
+
+.settings-div{
+    @include displayFLex();
+    background-color: $color_level_two;
+    height: 81vh;
+    flex-wrap: wrap;
+    flex-direction: row;
+    .settings-wrapper-div div{
+        color: $color_text;
+        width: 100%;
+        @include displayFLex();
+        justify-content: space-evenly;
+        margin-top: 3vh;
+        button {
+            @include button();
+            margin-left: 2vw;
+        }
+    }
 }

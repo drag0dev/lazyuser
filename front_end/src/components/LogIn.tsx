@@ -50,6 +50,7 @@ const LogIn = () => {
     };
 
     return (
+        <div className='form-wrapper-div'>
             <div className='login-form'>
                 <h1 className="login-h">Sign in</h1> 
 
@@ -70,6 +71,8 @@ const LogIn = () => {
                 </div>
                 
             </div>
+        </div>
+            
     )
 };
 

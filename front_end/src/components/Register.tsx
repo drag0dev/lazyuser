@@ -89,29 +89,31 @@ const Register = () => {
     }
 
     return(
-        <div className='register-form'>
-                <h1 className="login-h">Sign up</h1> 
+        <div className='form-wrapper-div'>
+            <div className='register-form'>
+                    <h1 className="login-h">Sign up</h1> 
 
-                <p className="message">{loginMessage}</p>
+                    <p className="message">{loginMessage}</p>
 
-                <div className="input-field">
-                    <input placeholder="Username"  className="username-input" type="text" value={enteredUsername} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredUsername(e.currentTarget.value)}}/>
+                    <div className="input-field">
+                        <input placeholder="Username"  className="username-input" type="text" value={enteredUsername} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredUsername(e.currentTarget.value)}}/>
+                    </div>
+
+                    <div className="input-field">
+                        <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>
+                    </div>
+
+                    <div className="input-field">
+                        <input placeholder="E-mail" className="email-input" type="text" value={enteredEmail} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setEnteredEmail(e.currentTarget.value)}}/>
+                    </div>
+
+                    <button className="register-button" onClick={registerOnClick}>Sign up</button>
+
+                    <div className='login-message-div'>
+                        <p className="login-message">Already have an account? <Link to='/login'>Sign in</Link></p>
+                    </div>
+                    
                 </div>
-
-                <div className="input-field">
-                    <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>
-                </div>
-
-                <div className="input-field">
-                    <input placeholder="E-mail" className="email-input" type="text" value={enteredEmail} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setEnteredEmail(e.currentTarget.value)}}/>
-                </div>
-
-                <button className="register-button" onClick={registerOnClick}>Sign up</button>
-
-                <div className='login-message-div'>
-                    <p className="login-message">Already have an account? <Link to='/login'>Sign in</Link></p>
-                </div>
-                
             </div>
     );
 }

@@ -8,12 +8,12 @@ import URLs from './ApiURLs';
 
 import Header from './components/Header';
 import LogIn from './components/LogIn';
-import LoginPage from './pages/LoginPage';
 import Footer from './components/Footer';
 import Register from './components/Register';
 import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
 import DetailedGame from './components/DetailedGame';
+import Settings from './components/Settings';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -91,8 +91,9 @@ function App() {
                                       <JumpDiv gameId={gameId} setGameId={setGameId} getUserGames={getUserGames}/>
                                       <DetailedGame gameId={gameId} setGameId={setGameId} getUserGames={getUserGames} /> </>}
           />
-          <Route path='/login' element={<LoginPage />}/>
+          <Route path='/login' element={<LogIn />}/>
           <Route path='/register' element={<Register />} />
+          <Route path='/settings' element={<Settings />}/>
         </Routes>
         <Footer />
       </UserContext.Provider>
