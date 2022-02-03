@@ -17,6 +17,12 @@ $color_text: #C5C6C7;
     min-width: 10vw;
 }
 
+@mixin input {
+    background-color: $color_level_two;
+    color: $color_text;
+    border: 2px solid $color_level_one;
+}
+
 html{
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -76,9 +82,7 @@ html{
         border: 2px solid $color_level_one;
     }
     input{
-        background-color: $color_level_two;
-        color: $color_text;
-        border: 2px solid $color_level_one;
+        @include input();
     }
 
 }
@@ -230,5 +234,29 @@ hr{
             @include button();
             margin-left: 2vw;
         }
+    }
+}
+
+.form-wrapper{
+    @include displayFLex();
+    background-color: $color_level_two;
+    height: 81vh;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: $color_text;
+
+    .form-div{
+        @include displayFLex();
+        width: 100%;
+        margin-bottom: 3vh;
+
+        input{
+            margin-left: 1vw;
+            @include input();
+        }
+    }
+
+    button{
+        @include button();
     }
 }

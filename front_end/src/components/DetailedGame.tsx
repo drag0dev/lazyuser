@@ -1,6 +1,4 @@
-import { userInfo } from 'os';
 import React, {useEffect, useState, useRef, useContext} from 'react';
-import { createThis, forEachTrailingCommentRange, getJSDocAugmentsTag } from 'typescript';
 import { DetailedGameInterface } from '../App';
 import CheapSharkURLs from '../CheapSharkURLs';
 import { UserContext, userInfoContextType } from '../UserContext';
@@ -129,7 +127,7 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
 
         // changing array elements doesnt fire rerender, since the reference stays the same, a new array is required to fire a rerender 
         setDetailedGameInfo([...currentDetailedGamesInfo]);
-        detailDivRef.current?.scrollIntoView();
+        if(gameId.length==1)detailDivRef.current?.scrollIntoView();
     }
 
     const emptyGameArray = async () =>{

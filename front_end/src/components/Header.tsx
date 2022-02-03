@@ -2,6 +2,7 @@ import React, { useContext} from 'react';
 import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../UserContext';
 import { userInfoInterface } from '../App';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import URLs from '../ApiURLs';
 interface headerStateProp{
@@ -9,13 +10,17 @@ interface headerStateProp{
   }
 
 const Header = ({state}: headerStateProp) => {
+    const navigate = useNavigate();
     const {userInfo, setUserInfo} = useContext(UserContext);
     const onClickLogOut = async () => {
         let res = await fetch(URLs.urlLogout, {
             method: 'GET',
             credentials: 'include'
         });
-        if(res.status == 200)setUserInfo({username: '',logged: false });
+        if(res.status == 200){
+            setUserInfo({username: '',logged: false });
+            navigate('/');
+        }
     }
     return (
         <div className='navbar'>

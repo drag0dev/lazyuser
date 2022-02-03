@@ -14,11 +14,12 @@ import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
 import DetailedGame from './components/DetailedGame';
 import Settings from './components/Settings';
+import ChangePassword from './components/ChangeEmail';
 export interface userInfoInterface{
   username: string
   logged: boolean
   games: string[]
-  email?: string  // TODO: make api endpoint for changing user info
+  email: string
 }
 
 export interface DetailedGameInterface{
@@ -28,12 +29,13 @@ export interface DetailedGameInterface{
 }
 
 function App() {
-  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: []});
+  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: ''});
   const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
   const [gameId, setGameId] = useState([]);
 
   const checkLogged = async() => {
     setloginCheckState(true);
+
     let res = await fetch(URLs.urlCheckLogin, {
         method: 'POST',
         credentials: 'include'
@@ -42,8 +44,9 @@ function App() {
     if(res.status==200){
         let data;
         data = await res.json();
-        setUserInfo({username: data.username, logged: true, games: []});
+        setUserInfo({username: data.username, logged: true, games: [], email: data.email});
     }
+
     setloginCheckState(false);
   }  
 
@@ -59,10 +62,10 @@ function App() {
 
     if(res.status==200){
       let data = await res.json();
-      setUserInfo({username: userInfo.username, logged: true, games: data});
+      setUserInfo({username: userInfo.username, logged: true, games: data, email: userInfo.email});
     }
     else{
-      setUserInfo({username: userInfo.username, logged: true, games: []});
+      setUserInfo({username: userInfo.username, logged: true, games: [], email: userInfo.email});
     }
   }
 
@@ -94,6 +97,7 @@ function App() {
           <Route path='/login' element={<LogIn />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/settings' element={<Settings />}/>
+          <Route path='/changeemail' element={<ChangePassword />}/>
         </Routes>
         <Footer />
       </UserContext.Provider>

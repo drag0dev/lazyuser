@@ -16,18 +16,20 @@ const Settings = () => {
             <div className='settings-wrapper-div'>
 
                 <div>
-                    <p>Username: {userInfo.userInfo.username}</p>
-                    <button>Change your username</button>
+                    <h1>Settings</h1>
                 </div>
 
-                
+                <div>
+                    <p>Username: {userInfo.userInfo.username}</p>
+                </div>
+
                 <div>
                     <p>Email: {userInfo.userInfo.email}</p>
-                    <button>Change your email</button>
+                    <button onClick={() => navigate('/changeemail')}>Change your email</button>
                 </div>
 
                 <div>
-                    <button>Change your password</button>
+                    <button onClick={() => navigate('/changepw')}>Change your password</button>
                 </div>
 
             </div>

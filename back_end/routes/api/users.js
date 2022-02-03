@@ -22,7 +22,7 @@ router.post('/checklogin', auth, (req, res)=>{
             return;
         }
         else {
-            res.status(200).json({username: user.username});
+            res.status(200).json({username: user.username, email: user.email});
             return;
         }
     });
@@ -132,7 +132,7 @@ router.post('/login', async (req,res)=>{
                 return;
             }
         });
-        res.status(200).send({username: userOld.username});
+        res.status(200).send({username: userOld.username, email: userOld.email});
         return;
     }
     else{
@@ -300,15 +300,38 @@ module.exports = router;
 // @desc    Retrieve all games for a user
 router.post('/changeinfo', auth, async (req, res)=>{
     let newEmail, newPassword;
-    
-    if(req.body.email){
-        newEmail = req.body.email
+
+    if(!req.body.password){
+        res.status(400).json({error: 'missing current password'});
+        return;
     }
-    else if(req.body.password){
-        newPassword = req.body.password;
+    
+    if(req.body.newEmail){
+        newEmail = req.body.newEmail
+    }
+    else if(req.body.newPassword){
+        newPassword = req.body.newPassword;
     }
     else{
         res.status(400).json({erorr: 'information to be changed need to me provided'});
+    }
+
+    const oldUser = await User.findOne({_id: req.user.user_id}, (err, user)=>{
+        if(err){
+            res.status(401).send();
+            return;
+        }
+        else if(!user){
+            res.status(400).json({error: 'user not found'}).send();
+            return;
+        }
+    }).clone();
+
+    let validPassword = await bcrypt.compare(req.body.password+pepper, oldUser.password);
+
+    if(!validPassword){
+        res.status(400).json({error: 'incorrect credentials'}).send();
+        return;
     }
 
     if (newEmail){
@@ -318,7 +341,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
                 return;
             }
             else if(!user){
-                res.status(400).json({error: 'user not found'}).send();
+                res.status(400).json().send();
                 return
             }
             else{
@@ -336,16 +359,10 @@ router.post('/changeinfo', auth, async (req, res)=>{
                 return;
             }
             else if(!user){
-                res.status(400).json({erorr: 'user not found'}).send();
+                res.status(400).json().send();
                 return;
             }
             else{
-                res.clearCookie('access_token', { // clearing token in order for user to relogin
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: 'none'
-                });
-
                 res.status(200).send();
                 return;
             }

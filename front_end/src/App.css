@@ -378,4 +378,51 @@ hr {
   min-width: 10vw;
   margin-left: 2vw;
 }
+
+.form-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: #1F2833;
+  height: 81vh;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  color: #C5C6C7;
+}
+
+.form-wrapper .form-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+  margin-bottom: 3vh;
+}
+
+.form-wrapper .form-div input {
+  margin-left: 1vw;
+  background-color: #1F2833;
+  color: #C5C6C7;
+  border: 2px solid #0B0C10;
+}
+
+.form-wrapper button {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+  text-align: center;
+  min-width: 10vw;
+}
 /*# sourceMappingURL=App.css.map */
