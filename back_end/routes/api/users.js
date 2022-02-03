@@ -295,3 +295,62 @@ router.post('/games', auth, (req, res)=>{
 });
 
 module.exports = router;
+
+// @route   POST api/user/changeinfo
+// @desc    Retrieve all games for a user
+router.post('/changeinfo', auth, async (req, res)=>{
+    let newEmail, newPassword;
+    
+    if(req.body.email){
+        newEmail = req.body.email
+    }
+    else if(req.body.password){
+        newPassword = req.body.password;
+    }
+    else{
+        res.status(400).json({erorr: 'information to be changed need to me provided'});
+    }
+
+    if (newEmail){
+        User.findOneAndUpdate({_id: req.user.user_id}, {email: newEmail}, (err, user) => {
+            if(err){
+                res.status(401).send();
+                return;
+            }
+            else if(!user){
+                res.status(400).json({error: 'user not found'}).send();
+                return
+            }
+            else{
+                res.status(200).send();
+                return;
+            }
+        });
+    }
+    else{
+        let salt = await bcrypt.genSalt(saltRounds);
+        let hashedPassword = await bcrypt.hash(newPassword + pepper, salt);
+        User.findOneAndUpdate({_id: req.user.user_id}, {password: hashedPassword}, (err, user) => {
+            if(err){
+                res.status(401).send();
+                return;
+            }
+            else if(!user){
+                res.status(400).json({erorr: 'user not found'}).send();
+                return;
+            }
+            else{
+                res.clearCookie('access_token', { // clearing token in order for user to relogin
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none'
+                });
+
+                res.status(200).send();
+                return;
+            }
+        });
+
+    }
+
+});

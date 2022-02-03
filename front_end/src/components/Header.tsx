@@ -23,7 +23,7 @@ const Header = ({state}: headerStateProp) => {
             {!state &&  // to prevent rendering as if user is not logged in while the session is being checked
                 <div className='userInteractionNavBar'>
                 {userInfo.logged && <div><p>{`Welcome, ${userInfo.username}`}</p></div>}
-                {userInfo.logged && <div><a><Link to='/settings'>Settings</Link></a></div>}
+                {userInfo.logged && <div><Link to='/settings'>Settings</Link></div>}
                 {userInfo.logged && <div><p className='logOutButton' onClick={onClickLogOut}>Log out</p></div>}
                 {!userInfo.logged && <div><Link to='/login'>Log in</Link></div> }
                 {!userInfo.logged && <div><Link to='/register'>Register</Link></div> }
