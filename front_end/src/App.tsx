@@ -14,7 +14,8 @@ import Search from './components/Search';
 import JumpDiv from './components/JumpDiv';
 import DetailedGame from './components/DetailedGame';
 import Settings from './components/Settings';
-import ChangePassword from './components/ChangeEmail';
+import ChangePassword from './components/ChangePassword';
+import ChangeEmail from './components/ChangeEmail';
 export interface userInfoInterface{
   username: string
   logged: boolean
@@ -97,7 +98,8 @@ function App() {
           <Route path='/login' element={<LogIn />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/settings' element={<Settings />}/>
-          <Route path='/changeemail' element={<ChangePassword />}/>
+          <Route path='/changeemail' element={<ChangeEmail />}/>
+          <Route path='/changepw' element={<ChangePassword />}/>
         </Routes>
         <Footer />
       </UserContext.Provider>

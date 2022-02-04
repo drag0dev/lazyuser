@@ -249,6 +249,7 @@ hr{
         @include displayFLex();
         width: 100%;
         margin-bottom: 3vh;
+        justify-content: space-around;
 
         input{
             margin-left: 1vw;
