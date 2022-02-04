@@ -7,6 +7,8 @@ const ChangeEmail = () => {
     const [loginMessage, setLoginMessage] = useState('');
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
+    const [confirmedPassword, setConfirmedPassowrd] = useState('');
+
     const navigate = useNavigate();
     const userInfo: userInfoContextType = useContext(UserContext);
 
@@ -66,6 +68,10 @@ const ChangeEmail = () => {
             setLoginMessage('You need to enter a password!');
             return;
         }
+        if(enteredPassword != confirmedPassword){
+            setLoginMessage('Passwords do not match!');
+            return;
+        }
         changeInfo();
     }
 
@@ -90,6 +96,12 @@ const ChangeEmail = () => {
                 <div className='form-div'>
                     <p>Enter you password: </p>
                     <input type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEnteredPassword(e.currentTarget.value)}></input>
+                </div>
+
+                <div className='form-div'>
+                    <p>Confirm your password: </p>
+                    <input type='password' value={confirmedPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmedPassowrd(e.currentTarget.value)}></input>
+
                 </div>
 
                 <div className='form-div'> 
