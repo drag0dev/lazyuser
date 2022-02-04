@@ -32,6 +32,10 @@ const Settings = () => {
                     <button onClick={() => navigate('/changepw')}>Change your password</button>
                 </div>
 
+                <div>
+                   <button onClick={() => navigate('/')}>Home</button> 
+                </div>
+
             </div>
 
         </div>

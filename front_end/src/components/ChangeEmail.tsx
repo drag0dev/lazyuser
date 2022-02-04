@@ -105,6 +105,7 @@ const ChangeEmail = () => {
                 </div>
 
                 <div className='form-div'> 
+                    <button onClick={() => navigate('/settings')}>Back</button>
                     <button onClick={onClickSubmit}>Submit</button>
                 </div>
 

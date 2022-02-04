@@ -45,7 +45,7 @@ function App() {
     if(res.status==200){
         let data;
         data = await res.json();
-        setUserInfo({username: data.username, logged: true, games: [], email: data.email});
+        setUserInfo({username: data.username, email: data.email, logged: true, games: []});
     }
 
     setloginCheckState(false);

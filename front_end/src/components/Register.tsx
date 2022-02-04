@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, HTMLInputTypeAttribute } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import URLs from '../ApiURLs';
 import { userInfoContextType } from '../UserContext';
@@ -7,10 +7,9 @@ import { UserContext } from '../UserContext';
 const Register = () => {
     const [enteredUsername, setEnteredUsername] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [enteredEmail, setEnteredEmail] = useState('');
     const [loginMessage, setLoginMessage] = useState('');
-
-    const emailRegex = `/\S+@\S+\.\S+/`;
 
     const navigate = useNavigate();
     const userInfo:userInfoContextType = useContext(UserContext);
@@ -60,8 +59,11 @@ const Register = () => {
         setLoginMessage('');
         if(!validateUsername(enteredUsername))return;
         if(!validatePassword(enteredPassword))return;
-        if(!validateEmail(enteredEmail))return;
-
+         if(enteredPassword != confirmPassword){
+            setLoginMessage('Passwords do not match!');
+            return;
+        }
+       if(!validateEmail(enteredEmail))return;
         const res = await fetch(URLs.urlRegister, {
             method: 'POST',
             credentials: 'include',
@@ -101,6 +103,10 @@ const Register = () => {
 
                     <div className="input-field">
                         <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>
+                    </div>
+
+                    <div className='input-field'>
+                        <input placeholder="Confirm password" className='password-input' type='password' value={confirmPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setConfirmPassword(e.currentTarget.value)}}></input>
                     </div>
 
                     <div className="input-field">
