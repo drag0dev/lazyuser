@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, HTMLInputTypeAttribute } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import URLs from '../ApiURLs';
-import { userInfoContextType } from '../UserContext';
 import { UserContext } from '../UserContext';
+import { userInfoContextType } from '../TypeInterfaces';
 
 const Register = () => {
     const [enteredUsername, setEnteredUsername] = useState('');

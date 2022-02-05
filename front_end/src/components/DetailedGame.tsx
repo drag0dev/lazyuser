@@ -1,48 +1,13 @@
-import React, {useEffect, useState, useRef, useContext} from 'react';
-import { DetailedGameInterface } from '../App';
-import CheapSharkURLs from '../CheapSharkURLs';
-import { UserContext, userInfoContextType } from '../UserContext';
 import URLs from '../ApiURLs';
-
-interface storesInfoInterface{
-    storeID: string,
-    storeName: string,
-    isActive: number,
-    images: {
-        banner: string,
-        logo: string,
-        icon: string
-    }
-}
-
-interface gameInfoInterface{
-    info: {
-        title: string,
-        steamAppID?: string,
-        thumb: string
-    },
-    cheapestPriceEver: {
-        price: number,
-        date: string
-    },
-    deals: [
-        {
-            storeID: string,
-            dealID: string,
-            price: string,
-            retailPrice: string,
-            savings: string
-        }
-    ]
-}
+import CheapSharkURLs from '../CheapSharkURLs';
+import React, {useEffect, useState, useRef, useContext} from 'react';
+import { UserContext } from '../UserContext';
+import { userInfoContextType, DetailedGameInterface, storesInfoInterface, gameInfoInterface} from '../TypeInterfaces';
 
 const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) =>{
     const detailDivRef = useRef<HTMLDivElement>(null);
-
     const userInfo: userInfoContextType = useContext(UserContext);
-
     const [storesInfo, setStoresInfo] = useState<storesInfoInterface[]>([]);
-
     const [detailedGamesInfo, setDetailedGameInfo] = useState<gameInfoInterface[]>([]);
 
     const handleFollowServerSide = async (clickedId: string, follow: boolean = true) => {

@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import URLs from '../ApiURLs';
-import { UserContext, userInfoContextType } from '../UserContext';
+import { UserContext } from '../UserContext';
+import { userInfoContextType } from '../TypeInterfaces';
 
 const ChangePassword = () => {
     const [newPassword, setNewPassowrd]= useState('');

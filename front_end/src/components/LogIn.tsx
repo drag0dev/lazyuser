@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import URLs from '../ApiURLs';
-import { userInfoInterface } from '../App';
-import { userInfoContextType } from '../UserContext';
 import { UserContext } from '../UserContext';
+import { userInfoContextType } from '../TypeInterfaces';
 
 const LogIn = () => {
     const userInfo:userInfoContextType = useContext(UserContext);

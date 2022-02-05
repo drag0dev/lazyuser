@@ -1,12 +1,5 @@
 import React from 'react';
-
-export interface SearchResultInerface{
-    name: string,
-    cheapestPrice: string,
-    imageURL: string,
-    gameId: string,
-    setGameId: Function
-}
+import { SearchResultInerface } from '../TypeInterfaces';
 
 const SearchResultGame = ({name, cheapestPrice, imageURL, gameId, setGameId}:SearchResultInerface) => {
 

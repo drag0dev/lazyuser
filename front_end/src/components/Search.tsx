@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
-import { SearchResultInerface } from './SearchResultGame';
 import CheapSharkURLs from '../CheapSharkURLs';
 import SearchResultGame from './SearchResultGame';
-import { DetailedGameInterface } from '../App';
-
-interface gamesSerachResultJSON{
-    gameID: string,
-    steamAppId?: string,
-    cheapest: string,
-    cheapestDealID: string,
-    external: string,
-    internalName: string,
-    thumb : string
-}
+import { DetailedGameInterface, gamesSerachResultJSON} from '../TypeInterfaces';
 
 const Search = ({gameId, setGameId}: DetailedGameInterface) => {
     const [searchString, setSearchString] = useState('');

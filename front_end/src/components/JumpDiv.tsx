@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { UserContext } from '../UserContext';
-import { userInfoContextType } from '../UserContext';
-import DetailedGameContext, { DetailedGameInterface } from '../App';
+import {DetailedGameInterface, userInfoContextType} from '../TypeInterfaces';
+
 const JumpDiv = ({gameId, setGameId}: DetailedGameInterface) => {
     const userInfo: userInfoContextType = useContext(UserContext);
 

@@ -1,12 +1,7 @@
 import { createContext } from "react";
-import { userInfoInterface } from "./App";
-export type userInfoContextType = {
-    userInfo: userInfoInterface,
-    setUserInfo: Function
-}
+import { userInfoContextType, userInfoInterface } from './TypeInterfaces';
 
 const defaultUserInfo: userInfoInterface = {username: '', logged: true, games: [], email: ''};
 const defaultFunction: Function = () => {};
 
 export const UserContext = createContext<userInfoContextType>({userInfo: defaultUserInfo, setUserInfo: defaultFunction});
-

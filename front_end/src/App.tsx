@@ -1,10 +1,10 @@
+import './App.css';
+import URLs from './ApiURLs';
+
 import React, { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
 import { UserContext } from './UserContext';
-import { userInfoContextType } from './UserContext';
-
-import './App.css';
-import URLs from './ApiURLs';
+import {userInfoInterface } from './TypeInterfaces';
 
 import Header from './components/Header';
 import LogIn from './components/LogIn';
@@ -16,18 +16,6 @@ import DetailedGame from './components/DetailedGame';
 import Settings from './components/Settings';
 import ChangePassword from './components/ChangePassword';
 import ChangeEmail from './components/ChangeEmail';
-export interface userInfoInterface{
-  username: string
-  logged: boolean
-  games: string[]
-  email: string
-}
-
-export interface DetailedGameInterface{
-  gameId: string[],
-  setGameId: Function,
-  getUserGames: Function
-}
 
 function App() {
   const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: ''});
@@ -70,13 +58,13 @@ function App() {
     }
   }
 
-  useEffect(()=>{
-      checkLogged();
-  }, []);
-
   const emptyGameArray = async () =>{
     await setGameId([]);
   }
+
+  useEffect(()=>{
+      checkLogged();
+  }, []);
 
   useEffect(() => {
     emptyGameArray();
@@ -91,6 +79,7 @@ function App() {
         <Header state={loginCheckState}/>
 
         <Routes>
+
           <Route path='/' element={<> <Search gameId={gameId} setGameId={setGameId} getUserGames={getUserGames}/> 
                                       <JumpDiv gameId={gameId} setGameId={setGameId} getUserGames={getUserGames}/>
                                       <DetailedGame gameId={gameId} setGameId={setGameId} getUserGames={getUserGames} /> </>}
@@ -100,6 +89,7 @@ function App() {
           <Route path='/settings' element={<Settings />}/>
           <Route path='/changeemail' element={<ChangeEmail />}/>
           <Route path='/changepw' element={<ChangePassword />}/>
+        
         </Routes>
         <Footer />
       </UserContext.Provider>
