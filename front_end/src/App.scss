@@ -45,6 +45,8 @@ html{
         @include displayFLex();
         align-items: center;
         justify-content: right;
+        flex-wrap: wrap;
+        flex-direction: row;
         width: 50%;
         div {
             margin-left: 2vw;
@@ -208,8 +210,6 @@ a:focus, a, a:active{
             height: auto;
         }
     } 
-
-    
 }
 
 hr{
@@ -260,4 +260,59 @@ hr{
     button{
         @include button();
     }
+}
+
+@media screen and (max-width: 480px){
+    label, p, a, h1, input, button, h4{
+        font-size: 4vw;
+    }
+
+    .results-div div{
+        width: 50%;
+    }
+
+    .jump-div button{
+        margin-left: 3vw;
+    }
+
+    .detailed-games{
+        .big-image, .description-p, button[class^="follow-button-"]{
+            width: 50%;
+            margin-top: 1vh;
+        }
+    }
+
+    .deals-div{
+        a{
+            margin-left: 10vw;
+        }
+    }
+
+    .userInteractionNavBar{
+        div{
+            width: 100%;
+        }
+    }
+
+}
+
+
+@media screen and (max-width: 767px) and (min-width: 481px){
+    label, p, a, h1, input, button, h4{
+        font-size: 3vw;
+    }
+
+     .detailed-games{
+        .big-image, .description-p, button[class^="follow-button-"]{
+            width: 50%;
+            margin-top: 1vh;
+        }
+    }
+
+    .deals-div{
+        a{
+            margin-left: 5vw;
+        }
+    }
+
 }

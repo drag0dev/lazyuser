@@ -116,7 +116,7 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
                 <div key={`detailed-game-${game.info.title}`} className='detailed-games'>
                     <img src={game.info.thumb} className='big-image'/>
 
-                    <p>
+                    <p className='description-p'>
                         Name: {game.info.title}
                         <br />
                         Cheapest: ${game.cheapestPriceEver.price} ({game.cheapestPriceEver.date}.)

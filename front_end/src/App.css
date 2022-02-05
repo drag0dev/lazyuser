@@ -39,6 +39,12 @@ html {
   -webkit-box-pack: right;
       -ms-flex-pack: right;
           justify-content: right;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   width: 50%;
 }
 
@@ -425,5 +431,40 @@ hr {
   color: #C5C6C7;
   text-align: center;
   min-width: 10vw;
+}
+
+@media screen and (max-width: 480px) {
+  label, p, a, h1, input, button, h4 {
+    font-size: 4vw;
+  }
+  .results-div div {
+    width: 50%;
+  }
+  .jump-div button {
+    margin-left: 3vw;
+  }
+  .detailed-games .big-image, .detailed-games .description-p, .detailed-games button[class^="follow-button-"] {
+    width: 50%;
+    margin-top: 1vh;
+  }
+  .deals-div a {
+    margin-left: 10vw;
+  }
+  .userInteractionNavBar div {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 481px) {
+  label, p, a, h1, input, button, h4 {
+    font-size: 3vw;
+  }
+  .detailed-games .big-image, .detailed-games .description-p, .detailed-games button[class^="follow-button-"] {
+    width: 50%;
+    margin-top: 1vh;
+  }
+  .deals-div a {
+    margin-left: 5vw;
+  }
 }
 /*# sourceMappingURL=App.css.map */
