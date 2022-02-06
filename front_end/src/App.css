@@ -76,7 +76,6 @@ html {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  justify-self: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: horizontal;
@@ -96,9 +95,80 @@ html {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .form-wrapper-div .login-form p, .form-wrapper-div .register-form p {
+  text-align: center;
+}
+
+.form-wrapper-div .forgot-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 30%;
+}
+
+.form-wrapper-div .forgot-form div, .form-wrapper-div .forgot-form h1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-wrapper-div .forgot-form p {
+  text-align: center;
+}
+
+.form-wrapper-div .forgot-form h1 {
+  margin-bottom: 2vh;
+}
+
+.form-wrapper-div .forgot-form .header-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-wrapper-div .forgot-form .header-div * {
+  width: 100%;
+  height: 100%;
+  text-align: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -114,6 +184,7 @@ html {
   background-color: #1F2833;
   color: #C5C6C7;
   border: 2px solid #0B0C10;
+  margin-left: 2vw;
 }
 
 .footer {
@@ -449,6 +520,9 @@ hr {
   }
   .deals-div a {
     margin-left: 10vw;
+  }
+  .userInteractionNavBar {
+    text-align: right;
   }
   .userInteractionNavBar div {
     width: 100%;

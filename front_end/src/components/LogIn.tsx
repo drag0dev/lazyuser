@@ -68,6 +68,10 @@ const LogIn = () => {
                 <div className='register-message-div'>
                     <p className="register-message">Don't have an account? <Link to='/register'>Sign Up</Link></p>
                 </div>
+
+                <div>
+                    <p>Forgot password? <Link to='/forgot'>Reset it</Link></p>
+                </div>
                 
             </div>
         </div>

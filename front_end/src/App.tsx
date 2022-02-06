@@ -16,6 +16,7 @@ import DetailedGame from './components/DetailedGame';
 import Settings from './components/Settings';
 import ChangePassword from './components/ChangePassword';
 import ChangeEmail from './components/ChangeEmail';
+import ForgotPW from './components/ForgotPW';
 
 function App() {
   const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: ''});
@@ -89,7 +90,8 @@ function App() {
           <Route path='/settings' element={<Settings />}/>
           <Route path='/changeemail' element={<ChangeEmail />}/>
           <Route path='/changepw' element={<ChangePassword />}/>
-        
+          <Route path='/forgot' element={<ForgotPW />}/>
+
         </Routes>
         <Footer />
       </UserContext.Provider>
