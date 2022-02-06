@@ -2,6 +2,23 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth'); // function meant to check verify the jwt
+const nodemailer = require('nodemailer');
+const uuidv1 = require('uuidv1');
+
+const email = require('../../config/email_credentials');
+const transporter = nodemailer.createTransport({
+    host: 'smtp-mail.outlook.com',
+    secureConnetion: false,
+    port: 587,
+    tls: {
+        ciphers: 'SSLv3'
+    },
+    auth: {
+        user: email.username,
+        pass: email.pw
+    },
+    path: '' 
+});
 
 const User = require('../../models/User'); // user model
 
@@ -25,7 +42,7 @@ router.post('/checklogin', auth, (req, res)=>{
             res.status(200).json({username: user.username, email: user.email});
             return;
         }
-    });
+    }).clone();
 });
 
 // @route   GET api/user/checklogin
@@ -118,20 +135,22 @@ router.post('/login', async (req,res)=>{
             expiresIn: '7h',
         }
     );
-    res.cookie("access_token", newToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'none'
-    });
-    
+
     let validPassword = await bcrypt.compare(req.body.password+pepper, userOld.password); // checking if the password is correct
     if(validPassword){
-        User.findOneAndUpdate({username: req.body.username}, {token: newToken}, (err, user)=>{ // updating the db with new token
+        await User.findOneAndUpdate({username: req.body.username}, {token: newToken}, (err, user)=>{ // updating the db with new token
             if(err){
                 res.status(500).json({error: err});
                 return;
             }
-        });
+        }).clone();
+
+        res.cookie("access_token", newToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none'
+        }); 
+
         res.status(200).send({username: userOld.username, email: userOld.email});
         return;
     }
@@ -169,7 +188,7 @@ router.delete('/del', auth, (req, res)=>{
                         res.status(200).send();
                         return;
                     }
-                });
+                }).clone();
             }
         });
     }
@@ -215,7 +234,7 @@ router.post('/addgame', auth, (req, res)=>{
                         res.status(200).send();
                     }
                 }
-            );
+            ).clone();
         }
     });
 });
@@ -260,7 +279,7 @@ router.post('/delgame', auth, (req, res)=>{
                     res.status(200).send();
                     return;
                 }
-            });
+            }).clone();
         }
     });
 });
@@ -294,7 +313,6 @@ router.post('/games', auth, (req, res)=>{
     });
 });
 
-module.exports = router;
 
 // @route   POST api/user/changeinfo
 // @desc    Retrieve all games for a user
@@ -371,3 +389,59 @@ router.post('/changeinfo', auth, async (req, res)=>{
     }
 
 });
+
+// @route   POST api/user/forgot
+// @desc    Reset password for a given user
+router.post('/forgot', async (req, res)=>{
+    let givenString;
+    if (!req.body.username){
+        res.status(400).json({error: 'missing username/email'}).send();
+        return;
+    }
+    givenString = req.body.username;
+
+    let oldUser;
+    if(givenString.includes('@')){ // find user by email
+        oldUser = await User.findOne({email: givenString});
+        if(oldUser==undefined){
+            res.status(200).send();
+            return;
+        }
+    }else{ // find user by username
+        oldUser = await User.findOne({username: givenString});
+        if(oldUser == undefined){
+            res.status(200).send();
+            return;
+        }
+    }
+
+    let newPw = uuidv1();
+    let salt = await bcrypt.genSalt(saltRounds); // generating salt
+    oldUser.password = await bcrypt.hash(newPw + pepper, salt); // hashing password
+
+    await oldUser.save().catch(err => {
+        res.status(401).send();
+        return;
+    });
+
+
+    let options = {
+        from: email.username,
+        to: oldUser.email,
+        subject: 'LazyUser - Password reset',
+        text: `Hi ${oldUser.username},\n\nYour new passowrd is: ${newPw}\n\nThank you, LazyUser`
+    }
+
+    await transporter.sendMail(options, (err, info)=>{
+        if(err){
+            console.log(`Error: ${err}`);
+            res.status(401).send();
+            return;
+        }
+        else{
+            res.status(200).send();
+        }
+    });
+});
+
+module.exports = router;

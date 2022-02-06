@@ -47,7 +47,12 @@ const ForgotPW = () => {
             body: body
         });
 
-        if(res.status == 200)navigate('/');
+        if(res.status == 200){
+            setMessage('Email with a new password has been sent if a user exists with a given email/username!')
+            const timer = setTimeout(() => {
+                navigate('/login');
+            }, 2000); 
+        }
         else setMessage('There was a problem sending a password request, please try again later!');
     }
 
