@@ -39,7 +39,7 @@ router.post('/checklogin', auth, (req, res)=>{
             return;
         }
         else {
-            res.status(200).json({username: user.username, email: user.email});
+            res.status(200).json({username: user.username, email: user.email, emailStatus: user.emailVerified});
             return;
         }
     }).clone();
@@ -83,12 +83,14 @@ router.post('/register', async (req, res)=> {
 
     newUser.username = req.body.username; // setting the username
     newUser.email = req.body.email; // sett the email
+    newUser.emailVerified= false;
 
     let salt = await bcrypt.genSalt(saltRounds); // generating salt
     newUser.password = await bcrypt.hash(req.body.password + pepper, salt); // hashing password
 
-    newUser.save((err)=>{ // save user
+    await newUser.save((err)=>{ // save user
         if(err){
+            console.log(err)
             res.status(400).json({error: err});
             return;
         }
@@ -151,7 +153,7 @@ router.post('/login', async (req,res)=>{
             sameSite: 'none'
         }); 
 
-        res.status(200).send({username: userOld.username, email: userOld.email});
+        res.status(200).send({username: userOld.username, email: userOld.email, emailStatus: userOld.emailVerified});
         return;
     }
     else{
@@ -353,7 +355,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
     }
 
     if (newEmail){
-        User.findOneAndUpdate({_id: req.user.user_id}, {email: newEmail}, (err, user) => {
+        User.findOneAndUpdate({_id: req.user.user_id}, {email: newEmail, emailVerified: false}, (err, user) => {
             if(err){
                 res.status(401).send();
                 return;
@@ -363,7 +365,6 @@ router.post('/changeinfo', auth, async (req, res)=>{
                 return
             }
             else{
-                res.status(200).send();
                 return;
             }
         });
@@ -444,4 +445,72 @@ router.post('/forgot', async (req, res)=>{
     });
 });
 
+// @route   POST api/user/verifyemail
+// @desc    Verify given email
+router.post('/verifyemail', (req, res) => {
+    if(!req.body.vid){
+        res.status(400).json({error: 'missing vid'}).send();
+        return;
+    }
+    let vid = req.body.vid;
+
+    User.findOneAndUpdate({emailVerificationToken: vid}, {emailVerified: true}, {returnNewDocument: true},(err, user)=>{
+        if(err){
+            res.status(500).send();
+            return;
+        }
+        else if(!user){
+            res.status(400).json({error: 'user not found'}).send();
+            return;
+        }
+        else{
+            if(!user.emailVerified){
+                res.status(200).send();
+                return;
+            }else{
+                res.status(400).send();
+                return;
+            }
+        }
+    });
+});
+
+// @route  POST api/user/requestev
+// @desc   Send a verification email
+router.post('/requestev', auth, async (req, res)=>{
+    let oldUser = await User.findOne({_id: req.user.user_id});
+    if(oldUser==undefined){
+        res.status(400).send();
+        return;
+    }
+
+    let token = uuidv1();
+
+    oldUser.emailVerificationToken = token;
+    await oldUser.save().catch((err) => {
+        res.status(500).send();
+        return;
+    });
+
+    let resetLink = `http://localhost:3000/verifyem/${token}`;
+
+    let options = {
+        from: email.username,
+        to: oldUser.email,
+        subject: 'LazyUser - Verify your email',
+        text: `Hi ${oldUser.username},\n\nClick this to verify your email -> ${resetLink}\n\nThank you, LazyUser`
+    }
+
+    await transporter.sendMail(options, (err, info)=>{
+        if(err){
+            console.log(`Error: ${err}`);
+            res.status(401).send();
+            return;
+        }
+        else{
+            res.status(200).send();
+        }
+    });
+
+});
 module.exports = router;
