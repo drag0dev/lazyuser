@@ -465,7 +465,7 @@ router.post('/verifyemail', (req, res) => {
         }
         else{
             if(!user.emailVerified){
-                res.status(200).send();
+                res.status(200).json({username: user.username}).send();
                 return;
             }else{
                 res.status(400).send();

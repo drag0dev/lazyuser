@@ -504,6 +504,21 @@ hr {
   min-width: 10vw;
 }
 
+.form-wrapper .verification-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
 @media screen and (max-width: 480px) {
   label, p, a, h1, input, button, h4 {
     font-size: 4vw;
@@ -540,5 +555,16 @@ hr {
   .deals-div a {
     margin-left: 5vw;
   }
+}
+
+.footer img {
+  height: 2.5vh;
+  width: auto;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.footer div {
+  padding-left: 1vw;
 }
 /*# sourceMappingURL=App.css.map */

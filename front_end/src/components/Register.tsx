@@ -74,7 +74,7 @@ const Register = () => {
         });
 
         if(res.status == 200){
-            userInfo.setUserInfo({username: enteredUsername, logged: true});
+            userInfo.setUserInfo({username: enteredUsername, logged: true, email: enteredEmail, emailVerified: false});
             navigate('/');
         }
         else if(res.status == 400){

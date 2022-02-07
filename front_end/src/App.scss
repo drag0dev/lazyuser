@@ -298,6 +298,12 @@ hr{
     button{
         @include button();
     }
+
+    .verification-form{
+        @include displayFLex();
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 480px){
@@ -353,4 +359,15 @@ hr{
         }
     }
 
+}
+
+.footer{
+    img{
+        height: 2.5vh;
+        width: auto;
+        filter: invert(1);
+    }
+    div{
+        padding-left: 1vw;
+    }
 }

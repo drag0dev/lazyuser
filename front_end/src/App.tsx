@@ -92,7 +92,7 @@ function App() {
           <Route path='/changeemail' element={<ChangeEmail />}/>
           <Route path='/changepw' element={<ChangePassword />}/>
           <Route path='/forgot' element={<ForgotPW />}/>
-          <Route path='/verifyem/:vid' element={<ConfirmEmail />}/>
+          <Route path='/verifyem/:vid' element={<ConfirmEmail state={loginCheckState}/>}/>
         </Routes>
         <Footer />
       </UserContext.Provider>

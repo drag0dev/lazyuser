@@ -22,7 +22,7 @@ const Settings = () => {
     }
 
     const onClickVerify = () => {
-        setVerificaitonMessage('Requesting verificaiton...');
+        setVerificaitonMessage('Requesting verification...');
         requestVerification();
     }
 

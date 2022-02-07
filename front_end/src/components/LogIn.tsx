@@ -40,7 +40,7 @@ const LogIn = () => {
 
         if(res.status == 200){
             let data = await res.json();
-            userInfo.setUserInfo({username: data.username, logged: true, email: data.email});
+            userInfo.setUserInfo({username: data.username, logged: true, email: data.email, emailVerified: data.emailStatus});
         }
         else{
             setLoginMessage('Incorrect credentials!');
