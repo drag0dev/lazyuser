@@ -16,3 +16,4 @@ yarn-error.log*
 /src/App.css.map
 /src/ApiURLs.tsx
 /src/assets/*
+/src/.env
