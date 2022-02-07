@@ -25,6 +25,7 @@ function App() {
   const [gameId, setGameId] = useState([]);
 
   const checkLogged = async() => {
+    console.log(URLs);
     setloginCheckState(true);
 
     let res = await fetch(URLs.urlCheckLogin, {
