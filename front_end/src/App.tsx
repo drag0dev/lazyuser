@@ -17,9 +17,10 @@ import Settings from './components/Settings';
 import ChangePassword from './components/ChangePassword';
 import ChangeEmail from './components/ChangeEmail';
 import ForgotPW from './components/ForgotPW';
+import ConfirmEmail from './components/ConfirmEmail';
 
 function App() {
-  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: ''});
+  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: '', emailVerified: false});
   const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
   const [gameId, setGameId] = useState([]);
 
@@ -34,7 +35,7 @@ function App() {
     if(res.status==200){
         let data;
         data = await res.json();
-        setUserInfo({username: data.username, email: data.email, logged: true, games: []});
+        setUserInfo({username: data.username, email: data.email, logged: true, games: [], emailVerified: data.emailStatus});
     }
 
     setloginCheckState(false);
@@ -52,10 +53,10 @@ function App() {
 
     if(res.status==200){
       let data = await res.json();
-      setUserInfo({username: userInfo.username, logged: true, games: data, email: userInfo.email});
+      setUserInfo({username: userInfo.username, logged: true, games: data, email: userInfo.email, emailVerified: userInfo.emailVerified});
     }
     else{
-      setUserInfo({username: userInfo.username, logged: true, games: [], email: userInfo.email});
+      setUserInfo({username: userInfo.username, logged: true, games: [], email: userInfo.email, emailVerified: userInfo.emailVerified});
     }
   }
 
@@ -91,7 +92,7 @@ function App() {
           <Route path='/changeemail' element={<ChangeEmail />}/>
           <Route path='/changepw' element={<ChangePassword />}/>
           <Route path='/forgot' element={<ForgotPW />}/>
-
+          <Route path='/verifyem/:vid' element={<ConfirmEmail />}/>
         </Routes>
         <Footer />
       </UserContext.Provider>

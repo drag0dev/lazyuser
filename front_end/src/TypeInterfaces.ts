@@ -1,8 +1,9 @@
 export interface userInfoInterface{
-  username: string
-  logged: boolean
-  games: string[]
-  email: string
+    username: string
+    logged: boolean
+    games: string[]
+    email: string
+    emailVerified: boolean
 }
 
 export type userInfoContextType = {
