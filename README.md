@@ -1,10 +1,13 @@
-# Lazy user
-Lazy user is a small web application that tracks game prices using cheapshark API. Front end is being rewritten in React with Typescript. Backend is a Node.js/Express API that is an interface for a Mongo database.
-## Database
-Database holds users email, username, password, token and followed games. Password is peppered, salted and hashed and then stored in database. Cookies are used to store JWT tokens which as of right now expire in 7 days.
-## Things left to implement and or fix
-**Implement** - settings page, password reset, email notifications, remeber me button, make cookies persistant in incognito mode, find a new api to get game images (maybe?)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/622bba2c-7f6b-4a2d-ab18-f0f7124701b4/deploy-status)](https://app.netlify.com/sites/hardcore-raman-df6a8c/deploys)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=lazy-user-api&style=flat)
 
-**Fix** - follow buttons not rendering correctly on smaller phones, handle server error properly on back end, organize css better 
-## back_end/config
-This path is ignored because it contains MongoURI, pepper, salting rounds and secret for signing JWT.
+
+<p align="center">
+    <img src="https://cdn.betterttv.net/emote/5ecbe33cf54be95e2a82ec94/3x"></img>
+</p>
+
+# Lazy user
+Lazy user is a small web application that tracks game prices using cheapshark API. Front end was done in React with Typescript. Backend is a Node.js/Express API that is an interface for a Mongo database. It's fully functional so if you want to use it -> [click me](https://hardcore-raman-df6a8c.netlify.app/).
+
+## Why?
+I was bored and wanted to mess with new technologies and languages :D
