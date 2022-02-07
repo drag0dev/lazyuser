@@ -11,7 +11,7 @@ const app = express();
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['https://620103048db7530009ed7d79--hardcore-raman-df6a8c.netlify.app/', 'http://localhost:3000/'],
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
 }));
