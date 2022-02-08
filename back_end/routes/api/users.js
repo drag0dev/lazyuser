@@ -164,36 +164,25 @@ router.post('/login', async (req,res)=>{
 
 // @route   DELETE api/user/del
 // @desc    Delete a user
-router.delete('/del', auth, (req, res)=>{
-    if(!req.body.username){
-        res.status(400).json({error: 'missing username'});
-        return;
-    }
-    else{
-
-        User.findOne({username: req.body.username}, (err, user)=>{
-            if(user._id != req.user.user_id){ // if id of the username and id from the jwt are not the same
-                res.status(403).json({error: 'invalid request'});
-                return;
-            }
-            else if(user.username != req.body.username){ // if provided username and username based on id from jwt are not the same
-                res.status(403).json({error: 'invalid request'});
-                return;
-            }
-            else{
-                User.findOneAndRemove({_id: req.user.user_id}, (err)=>{
-                    if(err){
-                        res.status(500).json({error: err});
-                        return;
-                    }
-                    else{
-                        res.status(200).send();
-                        return;
-                    }
-                }).clone();
-            }
-        });
-    }
+router.delete('/del', auth, async (req, res)=>{
+    await User.findOneAndRemove({_id: req.user.user_id}, (err, user)=>{
+        if(err){
+            res.status(500).send();
+            return;
+        }
+        else if(!user){
+            res.status(400).send();
+            return;
+        }
+        else{
+            res.clearCookie('access_token', {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'none'
+            });
+            res.status(200).send();
+        }
+    }).clone();
 });
 
 // @route   POST api/user/addgame

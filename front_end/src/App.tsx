@@ -18,6 +18,7 @@ import ChangePassword from './components/ChangePassword';
 import ChangeEmail from './components/ChangeEmail';
 import ForgotPW from './components/ForgotPW';
 import ConfirmEmail from './components/ConfirmEmail';
+import DeleteAccount from './components/DeleteAccount';
 
 function App() {
   const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: '', emailVerified: false});
@@ -93,6 +94,7 @@ function App() {
           <Route path='/changepw' element={<ChangePassword />}/>
           <Route path='/forgot' element={<ForgotPW />}/>
           <Route path='/verifyem/:vid' element={<ConfirmEmail state={loginCheckState}/>}/>
+          <Route path='/delacc' element={<DeleteAccount />}/>
         </Routes>
         <Footer />
       </UserContext.Provider>

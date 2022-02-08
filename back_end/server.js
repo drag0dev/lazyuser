@@ -11,7 +11,7 @@ const app = express();
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'https://hardcore-raman-df6a8c.netlify.app',
+    origin: ['https://hardcore-raman-df6a8c.netlify.app', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
     credentials: true,
 }));

@@ -60,6 +60,10 @@ const Settings = () => {
                 </div>
 
                 <div>
+                    <button onClick={() => navigate('/delacc')}>Delete your account</button>
+                </div>
+
+                <div>
                    <button onClick={() => navigate('/')}>Home</button> 
                 </div>
 

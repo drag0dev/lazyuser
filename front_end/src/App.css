@@ -519,6 +519,40 @@ hr {
   text-align: center;
 }
 
+.form-wrapper .delete-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+.form-wrapper .delete-form input {
+  background-color: #1F2833;
+  color: #C5C6C7;
+  border: 2px solid #0B0C10;
+  margin-right: 2vw;
+}
+
+.form-wrapper .delete-form h1, .form-wrapper .delete-form p, .form-wrapper .delete-form div {
+  width: 100%;
+  margin-bottom: 2vh;
+}
+
 @media screen and (max-width: 480px) {
   label, p, a, h1, input, button, h4 {
     font-size: 4vw;
