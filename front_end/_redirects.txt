@@ -1,13 +1,1 @@
-/ /index.html/
-/login /index.html/login
-/register /index.html/register
-/settings /index.html/settings
-/changeemail /index.html/changeemail
-/changepw /index.html/changepw
-/forgot /index.html/forgot
-/delacc /index.html/delacc
-
-[[redirects]]
-    from = "/verifyem"
-    to = "/verifyem/"
-    query = {vid = ":vid"}
+/* /index.html 200
