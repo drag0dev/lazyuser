@@ -1,4 +1,5 @@
 export {}
+
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
@@ -46,8 +47,8 @@ router.post('/checklogin', auth, (req, res)=>{
     }).clone();
 });
 
-// @route   GET api/user/checklogin
-// @desc    Check if jwt has expired
+// @route   GET api/user/logout
+// @desc    Clear cookie
 router.get('/logout', auth, (req, res)=>{
     res.clearCookie('access_token', {
         httpOnly: true,
@@ -68,7 +69,7 @@ router.post('/register', async (req, res)=> {
         return;
     }
 
-    let num = await User.exists({username: req.body.username}); // count how many users exist with the provided username
+    let num: number = await User.exists({username: req.body.username}); // count how many users exist with the provided username
     if(num!=0){ // if username is already in use
         res.status(400).json({error: 'username already in use'});
         return;
@@ -84,7 +85,7 @@ router.post('/register', async (req, res)=> {
 
     newUser.username = req.body.username; // setting the username
     newUser.email = req.body.email; // sett the email
-    newUser.emailVerified= false;
+    newUser.emailVerified = false;
 
     let salt = await bcrypt.genSalt(saltRounds); // generating salt
     newUser.password = await bcrypt.hash(req.body.password + pepper, salt); // hashing password
@@ -309,7 +310,7 @@ router.post('/games', auth, (req, res)=>{
 // @route   POST api/user/changeinfo
 // @desc    Retrieve all games for a user
 router.post('/changeinfo', auth, async (req, res)=>{
-    let newEmail, newPassword;
+    let newEmail:string, newPassword:string;
 
     if(!req.body.password){
         res.status(400).json({error: 'missing current password'});
@@ -361,7 +362,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
     }
     else{
         let salt = await bcrypt.genSalt(saltRounds);
-        let hashedPassword = await bcrypt.hash(newPassword + pepper, salt);
+        let hashedPassword: string = await bcrypt.hash(newPassword + pepper, salt);
         User.findOneAndUpdate({_id: req.user.user_id}, {password: hashedPassword}, (err, user) => {
             if(err){
                 res.status(401).send();
@@ -384,7 +385,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
 // @route   POST api/user/forgot
 // @desc    Reset password for a given user
 router.post('/forgot', async (req, res)=>{
-    let givenString;
+    let givenString: string;
     if (!req.body.username){
         res.status(400).json({error: 'missing username/email'}).send();
         return;
@@ -406,7 +407,7 @@ router.post('/forgot', async (req, res)=>{
         }
     }
 
-    let newPw = uuidv1();
+    let newPw: string = uuidv1();
     let salt = await bcrypt.genSalt(saltRounds); // generating salt
     oldUser.password = await bcrypt.hash(newPw + pepper, salt); // hashing password
 
@@ -442,7 +443,7 @@ router.post('/verifyemail', (req, res) => {
         res.status(400).json({error: 'missing vid'}).send();
         return;
     }
-    let vid = req.body.vid;
+    let vid: string = req.body.vid;
 
     User.findOneAndUpdate({emailVerificationToken: vid}, {emailVerified: true}, {returnNewDocument: true},(err, user)=>{
         if(err){
@@ -474,7 +475,7 @@ router.post('/requestev', auth, async (req, res)=>{
         return;
     }
 
-    let token = uuidv1();
+    let token: string = uuidv1();
 
     oldUser.emailVerificationToken = token;
     await oldUser.save().catch((err) => {
@@ -482,7 +483,7 @@ router.post('/requestev', auth, async (req, res)=>{
         return;
     });
 
-    let resetLink = `http://localhost:3000/verifyem/${token}`;
+    let resetLink: string = `http://localhost:3000/verifyem/${token}`;
 
     let options = {
         from: email.username,
