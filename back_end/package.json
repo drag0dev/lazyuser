@@ -4,8 +4,9 @@
   "description": "App for checking game prices built with MERN stack",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "tsc && node build/server.js",
+    "server": "nodemon build/server.js",
+    "build": "tsc"
   },
   "author": "drag0dev",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "uuidv1": "^1.6.14"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.5"
   }
 }
