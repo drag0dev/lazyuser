@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { setFlagsFromString } from 'v8';
 import URLs from '../ApiURLs';
 import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../TypeInterfaces';
-import { headerStateProp } from '../TypeInterfaces';
-const ConfirmEmail = ({state}: headerStateProp) => {
+
+const ConfirmEmail = () => {
     const [message, setMessage] = useState<string>('');
     const { vid } = useParams();
     const navigate = useNavigate();
@@ -20,14 +19,13 @@ const ConfirmEmail = ({state}: headerStateProp) => {
            body: JSON.stringify({vid: vid})
         });
 
-
-        while(state){}// poor way to wait for userInfo to be fetched
         if(res.status == 200){
             let data = await res.json();
             if(userInfo.userInfo.username == data.username){
-                let newUserInfo = userInfo.userInfo;
-                newUserInfo.emailVerified = true;
-                userInfo.setUserInfo(newUserInfo);
+                userInfo.setUserInfo({
+                    ...userInfo.userInfo,
+                    emailVerified: true
+                });
             }
             setMessage('Email verified successfully!\nRedirecting to home page...');
             const timer = setTimeout(()=> {

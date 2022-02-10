@@ -23,10 +23,11 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
 
             if (res.status == 200){ // add the game to the tracked games on front end
                 let newArray = userInfo.userInfo.games;
-                let newUserInfo = userInfo.userInfo;
                 newArray.push(clickedId);
-                newUserInfo.games = newArray;
-                userInfo.setUserInfo(newUserInfo);
+                userInfo.setUserInfo({
+                    ...userInfo.userInfo,
+                    games: newArray
+                });
                 getUserGames();
             }
         
@@ -41,11 +42,12 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
             });
             if(res.status == 200){ // remove the game from the tracked on front end
                 let newArray = userInfo.userInfo.games;
-                let newUserInfo = userInfo.userInfo;
                 let index: number = newArray.indexOf(clickedId);
                 if (index > -1) newArray.splice(index, 1); // remove the gameId
-                newUserInfo.games = newArray;
-                userInfo.setUserInfo(newUserInfo);
+                userInfo.setUserInfo({
+                    ...userInfo.userInfo,
+                    games: newArray
+                });
                 getUserGames();
 
                 // if the game is currently displayed remove it
@@ -53,7 +55,6 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
                 if(index > -1){
                     let newGameIdArray = [...gameId];
                     newGameIdArray.splice(index, 1);
-                    console.log(gameId, newGameIdArray);
                     setGameId(newGameIdArray);
                 } 
             }

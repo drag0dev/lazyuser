@@ -4,6 +4,7 @@ export interface userInfoInterface{
     games: string[]
     email: string
     emailVerified: boolean
+    loading: boolean // introduced to prevent redirects before server responds
 }
 
 export type userInfoContextType = {
@@ -15,10 +16,6 @@ export interface DetailedGameInterface{
   gameId: string[],
   setGameId: Function,
   getUserGames: Function
-}
-
-export interface headerStateProp{
-    state: boolean;
 }
 
 export interface gamesSerachResultJSON{

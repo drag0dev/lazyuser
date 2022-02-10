@@ -15,8 +15,9 @@ const Register = () => {
     const userInfo:userInfoContextType = useContext(UserContext);
 
     useEffect(() => {
-        if(userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+        if(userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
+
 
     const validateEmail = (email: string): boolean => {
         if(email.length == 0){
@@ -74,7 +75,13 @@ const Register = () => {
         });
 
         if(res.status == 200){
-            userInfo.setUserInfo({username: enteredUsername, logged: true, email: enteredEmail, emailVerified: false});
+            userInfo.setUserInfo({
+                username: enteredUsername,
+                logged: true,
+                email: enteredEmail,
+                emailVerified: false,
+                loading: false
+            });
             navigate('/');
         }
         else if(res.status == 400){

@@ -14,8 +14,9 @@ const LogIn = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+        if(userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
+
 
     const loginOnClick = async () => {
         let username = enteredUsername;
@@ -40,7 +41,12 @@ const LogIn = () => {
 
         if(res.status == 200){
             let data = await res.json();
-            userInfo.setUserInfo({username: data.username, logged: true, email: data.email, emailVerified: data.emailStatus});
+            userInfo.setUserInfo({
+                username: data.username,
+                logged: true, email: data.email,
+                emailVerified: data.emailStatus,
+                loading: false
+            });
         }
         else{
             setLoginMessage('Incorrect credentials!');

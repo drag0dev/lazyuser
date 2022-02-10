@@ -15,8 +15,8 @@ const ChangeEmail = () => {
     const userInfo: userInfoContextType = useContext(UserContext);
 
     useEffect(() => {
-        if(!userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
 
     const validateEmail = (email: string): boolean => {
         if(email.length == 0){
@@ -50,9 +50,10 @@ const ChangeEmail = () => {
 
         if(res.status==200){
             navigate('/');
-            let newUserInfo = userInfo.userInfo;
-            newUserInfo.email = enteredEmail;
-            userInfo.setUserInfo(newUserInfo);
+            userInfo.setUserInfo({
+                ...userInfo.userInfo,
+                email: enteredEmail
+            });
         }
         else if(res.status == 401){
             setLoginMessage('There was a problem changing your email address, please try again later!');

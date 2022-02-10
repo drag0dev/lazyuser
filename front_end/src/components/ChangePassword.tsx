@@ -15,8 +15,8 @@ const ChangePassword = () => {
     const userInfo: userInfoContextType = useContext(UserContext);
 
     useEffect(() => {
-        if(!userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
 
     const handleNewPassword = async (pw: string) => {
        let res = await fetch(URLs.urlChangeInfo, {

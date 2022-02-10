@@ -27,8 +27,8 @@ const Settings = () => {
     }
 
     useEffect(() => {
-        if(!userInfo.userInfo.logged)navigate('/')
-    }, [userInfo.userInfo.logged]);
+        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/')
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
 
     return(
         <div className='settings-div'>

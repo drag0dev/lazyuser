@@ -10,9 +10,10 @@ const ForgotPW = () => {
     const navigate = useNavigate();
     const userInfo: userInfoContextType = useContext(UserContext);
 
-    useEffect(()=>{
-        if(userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+   useEffect(() => {
+        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
+
 
     const validateEmail = (email: string): boolean => {
         if(email.length == 0){

@@ -12,8 +12,8 @@ const DeleteAccount = () => {
     let userInfo: userInfoContextType = useContext(UserContext); 
     
     useEffect(() => {
-        if(!userInfo.userInfo.logged)navigate('/');
-    }, [userInfo.userInfo.logged]);
+        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+    }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
 
     const deleteAccount = async ( username: string) => {
         let res = await fetch(URLs.urlDelUser, {
@@ -24,8 +24,14 @@ const DeleteAccount = () => {
         if(res.status == 200){
             setMessage('Account successfully deleted, redirecting to home...');
             
-            let newUserInfo: userInfoInterface = {username: '', logged: false, games: [], emailVerified: false, email: ''};
-            userInfo.setUserInfo(newUserInfo);
+            userInfo.setUserInfo({
+                username: '',
+                email: '',
+                emailVerified: false,
+                loading: false,
+                games: [],
+                logged: false
+            });
 
             const timer = setTimeout(()=>{
                 navigate('/')

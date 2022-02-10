@@ -2,7 +2,7 @@ import './App.css';
 import URLs from './ApiURLs';
 
 import React, { useEffect, useState } from 'react';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import { UserContext } from './UserContext';
 import {userInfoInterface } from './TypeInterfaces';
 
@@ -21,26 +21,52 @@ import ConfirmEmail from './components/ConfirmEmail';
 import DeleteAccount from './components/DeleteAccount';
 
 function App() {
-  const [userInfo, setUserInfo] = useState<userInfoInterface>({username: '', logged: false, games: [], email: '', emailVerified: false});
-  const [loginCheckState, setloginCheckState] = useState(false); // false == it is not being currently checked, true == waiting for server to respond
+  const [userInfo, setUserInfo] = useState<userInfoInterface>({
+    username: '', logged: false,
+    games: [], email: '',
+    emailVerified: false,
+    loading: true
+  });
+
   const [gameId, setGameId] = useState([]);
 
   const checkLogged = async() => {
-    setloginCheckState(true);
+    setUserInfo({username: userInfo.username, // setting loading to true
+      logged: false,
+      email: userInfo.email,
+      emailVerified: userInfo.emailVerified,
+      loading: true,
+      games: userInfo.games
+    });
 
     let res = await fetch(URLs.urlCheckLogin, {
         method: 'POST',
         credentials: 'include'
     });
     
-    if(res.status==200){
+    if(res.status==200){ // if the session is valid
         let data;
         data = await res.json();
-        setUserInfo({username: data.username, email: data.email, logged: true, games: [], emailVerified: data.emailStatus});
+        setUserInfo({
+          username: data.username,
+          email: data.email,
+          logged: true,
+          games: [],
+          emailVerified: data.emalStatus,
+          loading: false
+        })
+    }else{ // if the session is not valid
+      setUserInfo({
+        username: '',
+        email: '',
+        logged: false,
+        games: [],
+        emailVerified: false,
+        loading: false
+      })
     }
 
-    setloginCheckState(false);
-  }  
+ }  
 
   const getUserGames = async () => {
     let res = await fetch(URLs.urlGames, {
@@ -54,10 +80,16 @@ function App() {
 
     if(res.status==200){
       let data = await res.json();
-      setUserInfo({username: userInfo.username, logged: true, games: data, email: userInfo.email, emailVerified: userInfo.emailVerified});
+      setUserInfo({
+        ...userInfo,
+        games: data
+      })
     }
     else{
-      setUserInfo({username: userInfo.username, logged: true, games: [], email: userInfo.email, emailVerified: userInfo.emailVerified});
+      setUserInfo({
+        ...userInfo,
+        games: []
+      })
     }
   }
 
@@ -79,7 +111,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value = {{userInfo: userInfo, setUserInfo: setUserInfo}} >
-        <Header state={loginCheckState}/>
+        <Header/>
 
         <Routes>
 
@@ -93,8 +125,9 @@ function App() {
           <Route path='/changeemail' element={<ChangeEmail />}/>
           <Route path='/changepw' element={<ChangePassword />}/>
           <Route path='/forgot' element={<ForgotPW />}/>
-          <Route path='/verifyem/:vid' element={<ConfirmEmail state={loginCheckState}/>}/>
+          <Route path='/verifyem/:vid' element={<ConfirmEmail/>}/>
           <Route path='/delacc' element={<DeleteAccount />}/>
+          <Route path='*' element={<Navigate to='/'/>}/>
         </Routes>
         <Footer />
       </UserContext.Provider>
