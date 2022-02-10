@@ -313,11 +313,13 @@ hr{
         text-align: center;
         input {
             @include input();
-            margin-right: 2vw; 
         }
         h1, p, div{
             width: 100%;
             margin-bottom: 2vh;
+        }
+        .submit-button{
+            margin-left: 1vw;
         }
     }
 }

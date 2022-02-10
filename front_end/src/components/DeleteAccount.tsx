@@ -67,7 +67,11 @@ const DeleteAccount = () => {
 
                 <div>
                     <input type='text' value={confirmedUsername} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setConfirmedUsername(e.currentTarget.value)}}></input>
-                    <button onClick={onClickSubmit}>Submit</button>
+                </div>
+
+                <div>
+                    <button onClick={() => navigate('/settings')}>Back</button>
+                    <button onClick={onClickSubmit} className='submit-button'>Submit</button>
                 </div>
 
             </div>

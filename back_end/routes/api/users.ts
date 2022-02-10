@@ -475,6 +475,11 @@ router.post('/requestev', auth, async (req, res)=>{
         return;
     }
 
+    if(oldUser.emailVerified == true){
+        res.status(400).send();
+        return;
+    }
+
     let token: string = uuidv1();
 
     oldUser.emailVerificationToken = token;
@@ -483,7 +488,7 @@ router.post('/requestev', auth, async (req, res)=>{
         return;
     });
 
-    let resetLink: string = `http://localhost:3000/verifyem/${token}`;
+    let resetLink: string = `https://hardcore-raman-df6a8c.netlify.app/verifyem/${token}`;
 
     let options = {
         from: email.username,

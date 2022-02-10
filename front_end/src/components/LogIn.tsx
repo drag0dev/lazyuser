@@ -43,9 +43,11 @@ const LogIn = () => {
             let data = await res.json();
             userInfo.setUserInfo({
                 username: data.username,
-                logged: true, email: data.email,
+                logged: true,
+                email: data.email,
                 emailVerified: data.emailStatus,
-                loading: false
+                loading: false,
+                games: []
             });
         }
         else{

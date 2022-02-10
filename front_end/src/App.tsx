@@ -31,19 +31,15 @@ function App() {
   const [gameId, setGameId] = useState([]);
 
   const checkLogged = async() => {
-    setUserInfo({username: userInfo.username, // setting loading to true
-      logged: false,
-      email: userInfo.email,
-      emailVerified: userInfo.emailVerified,
-      loading: true,
-      games: userInfo.games
+    setUserInfo({
+      ...userInfo,
+      loading: true 
     });
 
     let res = await fetch(URLs.urlCheckLogin, {
         method: 'POST',
         credentials: 'include'
     });
-    
     if(res.status==200){ // if the session is valid
         let data;
         data = await res.json();
@@ -52,7 +48,7 @@ function App() {
           email: data.email,
           logged: true,
           games: [],
-          emailVerified: data.emalStatus,
+          emailVerified: data.emailStatus,
           loading: false
         })
     }else{ // if the session is not valid
