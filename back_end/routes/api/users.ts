@@ -1,5 +1,3 @@
-import { reduceEachTrailingCommentRange } from "typescript";
-
 export {}
 
 const express = require('express');
@@ -277,11 +275,6 @@ router.post('/delgame', auth, (req, res)=>{
 router.post('/games', auth, (req, res)=>{
     if(!req.body.username){
         res.status(400).json({error: 'missing username'});
-        return;
-    }
-
-    if(req.body.username != req.user.user_id){
-        res.status(400).send();
         return;
     }
 
