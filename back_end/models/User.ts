@@ -16,10 +16,6 @@ const UserSchema = new Schema({
         type: [String],
         default: []
     },
-    token: {
-        type: String,
-        required: true,
-    },
     email: {
         type: String,
         required: true,

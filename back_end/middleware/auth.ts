@@ -5,7 +5,7 @@ function verifyToken(req, res, next){
     //token can be sent in a cookie
     const token = req.cookies.access_token;
     if(!token){
-        res.status(403).json({err: 'token required for authentication'});
+        res.status(401).json({err: 'token required for authentication'});
         return;
     }
 
@@ -15,7 +15,7 @@ function verifyToken(req, res, next){
                 return;
         }
         if(!decoded){
-            res.status(403).json({error: 'invalid token auth'});
+            res.status(400).json({error: 'invalid token auth'});
             return;
         }
         if(decoded){

@@ -31,14 +31,10 @@ const ChangePassword = () => {
             navigate('/');
             return;            
        }
-       else if(res.status == 401){
+       else{
            setLoginMessage('There was a problem changing your passowrd, please try again later!');
            return;
-       }
-       else{
-           setLoginMessage('Incorrect credentials!');
-           return;
-       }
+       } 
     }
 
     const onClickSubmit = () => {

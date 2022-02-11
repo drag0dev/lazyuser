@@ -1,3 +1,5 @@
+import { reduceEachTrailingCommentRange } from "typescript";
+
 export {}
 
 const express = require('express');
@@ -98,7 +100,7 @@ router.post('/register', async (req, res)=> {
         }
     });
 
-    newUser.token = jwt.sign( // generate jwt
+    let token = jwt.sign( // generate jwt
         {user_id: newUser._id,},
         token_key,
         {
@@ -106,7 +108,7 @@ router.post('/register', async (req, res)=> {
         }
     );
 
-    res.cookie("access_token", newUser.token, {
+    res.cookie("access_token", token, {
         httpOnly: true,
         secure: true,
         sameSite: 'none'
@@ -142,13 +144,6 @@ router.post('/login', async (req,res)=>{
 
     let validPassword = await bcrypt.compare(req.body.password+pepper, userOld.password); // checking if the password is correct
     if(validPassword){
-        await User.findOneAndUpdate({username: req.body.username}, {token: newToken}, (err, user)=>{ // updating the db with new token
-            if(err){
-                res.status(500).json({error: err});
-                return;
-            }
-        }).clone();
-
         res.cookie("access_token", newToken, {
             httpOnly: true,
             secure: true,
@@ -209,11 +204,11 @@ router.post('/addgame', auth, (req, res)=>{
             return 
         }
         else if(user._id != req.user.user_id){ // if id of the username and id from the jwt are not the same
-            res.status(403).json({error: 'bad request'});
+            res.status(400).json({error: 'bad request'});
             return;
         }
         else if(user.username != req.body.username){ // if provided username and username based on id from jwt are not the same
-            res.status(403).json({error: 'bad request'});
+            res.status(400).json({error: 'bad request'});
             return;
         }
         else{
@@ -232,7 +227,7 @@ router.post('/addgame', auth, (req, res)=>{
     });
 });
 
-// @route   DELETE api/user/delgame
+// @route   POST api/user/delgame
 // @desc    Remove a games from a user
 router.post('/delgame', auth, (req, res)=>{
     if(!req.body.username){
@@ -285,6 +280,11 @@ router.post('/games', auth, (req, res)=>{
         return;
     }
 
+    if(req.body.username != req.user.user_id){
+        res.status(400).send();
+        return;
+    }
+
     User.findOne({username: req.body.username}, (err, user)=>{
         if(err){
             res.status(500).send();
@@ -308,7 +308,7 @@ router.post('/games', auth, (req, res)=>{
 
 
 // @route   POST api/user/changeinfo
-// @desc    Retrieve all games for a user
+// @desc    Change user info
 router.post('/changeinfo', auth, async (req, res)=>{
     let newEmail:string, newPassword:string;
 
@@ -324,12 +324,12 @@ router.post('/changeinfo', auth, async (req, res)=>{
         newPassword = req.body.newPassword;
     }
     else{
-        res.status(400).json({erorr: 'information to be changed need to me provided'});
+        res.status(400).json({erorr: 'missing information'});
     }
 
     const oldUser = await User.findOne({_id: req.user.user_id}, (err, user)=>{
         if(err){
-            res.status(401).send();
+            res.status(500).send();
             return;
         }
         else if(!user){
@@ -348,7 +348,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
     if (newEmail){
         User.findOneAndUpdate({_id: req.user.user_id}, {email: newEmail, emailVerified: false}, (err, user) => {
             if(err){
-                res.status(401).send();
+                res.status(500).send();
                 return;
             }
             else if(!user){
@@ -365,7 +365,7 @@ router.post('/changeinfo', auth, async (req, res)=>{
         let hashedPassword: string = await bcrypt.hash(newPassword + pepper, salt);
         User.findOneAndUpdate({_id: req.user.user_id}, {password: hashedPassword}, (err, user) => {
             if(err){
-                res.status(401).send();
+                res.status(500).send();
                 return;
             }
             else if(!user){
@@ -412,7 +412,7 @@ router.post('/forgot', async (req, res)=>{
     oldUser.password = await bcrypt.hash(newPw + pepper, salt); // hashing password
 
     await oldUser.save().catch(err => {
-        res.status(401).send();
+        res.status(500).send();
         return;
     });
 
@@ -427,7 +427,7 @@ router.post('/forgot', async (req, res)=>{
     await transporter.sendMail(options, (err, info)=>{
         if(err){
             console.log(`Error: ${err}`);
-            res.status(401).send();
+            res.status(500).send();
             return;
         }
         else{
@@ -443,6 +443,7 @@ router.post('/verifyemail', (req, res) => {
         res.status(400).json({error: 'missing vid'}).send();
         return;
     }
+
     let vid: string = req.body.vid;
 
     User.findOneAndUpdate({emailVerificationToken: vid}, {emailVerified: true}, {returnNewDocument: true},(err, user)=>{
@@ -500,7 +501,7 @@ router.post('/requestev', auth, async (req, res)=>{
     await transporter.sendMail(options, (err, info)=>{
         if(err){
             console.log(`Error: ${err}`);
-            res.status(401).send();
+            res.status(500).send();
             return;
         }
         else{

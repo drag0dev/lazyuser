@@ -55,11 +55,8 @@ const ChangeEmail = () => {
                 email: enteredEmail
             });
         }
-        else if(res.status == 401){
-            setLoginMessage('There was a problem changing your email address, please try again later!');
-        }
         else{
-            setLoginMessage('Incorrect credentials!');
+            setLoginMessage('There was a problem changing your email address, please try again later!');
         }
 
     }
