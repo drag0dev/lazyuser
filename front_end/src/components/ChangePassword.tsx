@@ -37,23 +37,49 @@ const ChangePassword = () => {
        } 
     }
 
+    const validatePassword = (password: string): boolean => {
+        if(password.length == 0){
+            setLoginMessage('Password is required!')
+            return false;
+        }
+        else if(password.length < 7){
+            setLoginMessage('Password must be at least 7 characters long!');
+            return false;
+        }
+        else if(!(password.toUpperCase() != password)){ // check for lower case letters
+            setLoginMessage('Password requires at least one lower case letter!');
+            return false;
+        }
+        else if(!(password.toLowerCase() != password)){ // check for upper case letters
+            setLoginMessage('Password requires at least one upper case letter!');
+            return false;
+        }
+        else if(password.match(/^[a-zA-Z]+$/)){
+            setLoginMessage('Password must have a number!');
+            return false;
+        }
+        return true;
+
+    }
     const onClickSubmit = () => {
         setLoginMessage('');
-        if(newPassword != confirmNewPassword){
-            setLoginMessage('New passwords do not match!')
+        if(!validatePassword(newPassword)){
             return;
         }
-        else if(newPassword.length < 7){
-            setLoginMessage('New password must be at least 7 characters long!')
+        else if(newPassword != confirmNewPassword){
+            setLoginMessage('New passwords do not match!');
             return;
         }
         else if(oldPassword != confirmOldPassword){
-            setLoginMessage('Current passwords do not match!')
+            setLoginMessage('Current passwords do not match!');
+            return;
+        }
+        else if(!oldPassword || !confirmOldPassword){
+            setLoginMessage('Current password is required!');
             return;
         }
 
         handleNewPassword(newPassword);
-
     }
 
     return(
@@ -94,6 +120,17 @@ const ChangePassword = () => {
                 </div>
 
             </div>
+
+            <div className='password-info' >
+                        <p>
+                            Password must contain the following:<br />
+                                -A lower case leter <br />
+                                -A capital (uppercase) letter <br />
+                                -A number <br />
+                                -Minimum 7 characters <br />
+                        </p>
+                        
+                </div>
         </div>
     );
 }

@@ -23,18 +23,10 @@ const ChangeEmail = () => {
             setLoginMessage('You need to enter an email!');
             return false;
         }
-        let temp = email.split('@');
-        if (temp.length!=2){
-            setLoginMessage('Entered email has to be correct!');
+        else if(!email.match(/^[a-z0-9]+@[a-z]+\.[a-z]+$/)){
+            setLoginMessage('Entered email has to be correct!')
             return false;
         }
-
-        temp = temp[1].split('.');
-        if (temp.length!=2){
-            setLoginMessage('Entered email has to be correct!');
-            return false;
-        }
-
         return true;
     }
 
@@ -62,7 +54,7 @@ const ChangeEmail = () => {
     }
 
     const onClickSubmit = () => {
-        // setLoginMessage(''); not resetting msg
+        setLoginMessage('');
         if(!validateEmail(enteredEmail))return;
         if(enteredPassword.length ==0){
             setLoginMessage('You need to enter a password!');
@@ -110,6 +102,7 @@ const ChangeEmail = () => {
                 </div>
 
             </div>
+
         </div>
     );
 }

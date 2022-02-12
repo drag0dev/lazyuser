@@ -67,7 +67,7 @@ html{
         flex-wrap: wrap;
         flex-direction: row;
 
-        height: 50%;
+        height: 60%;
         div ,p ,h1{
             width: 100%;
             @include displayFLex();
@@ -75,6 +75,10 @@ html{
         }
         p{
           text-align: center;
+        }
+        input{
+            margin-bottom: 1vh;
+            margin-top: 1vh;
         }
     }
 
@@ -283,11 +287,36 @@ hr{
     flex-direction: row;
     color: $color_text;
 
-    .form-div{
+    .change-form{
         @include displayFLex();
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 50%;
+        height: 75%;
+        text-align: center;
+        button{
+            margin-left: 5vw;
+        }
+    }
+
+    .password-info{
+        @include displayFLex();
+        flex-wrap: wrap;
+        flex-direction: row;
+        max-width: 50%;
+        font-size: 2vw;
+        color: $color_level_four;
+        p{
+            background-color: $color_level_one;
+        }
+    }
+
+    .change-form .form-div{
+        @include displayFLex();
+        justify-content: center;
         width: 100%;
-        margin-bottom: 3vh;
-        justify-content: space-around;
+        margin-bottom: 2vh;
 
         input{
             margin-left: 1vw;
@@ -321,6 +350,37 @@ hr{
         .submit-button{
             margin-left: 1vw;
         }
+    }
+}
+
+.footer{
+    img{
+        height: 2.5vh;
+        width: auto;
+        filter: invert(1);
+    }
+    div{
+        padding-left: 1vw;
+    }
+}
+
+.password-info{
+    @include displayFLex();
+    flex-wrap: wrap;
+    flex-direction: row;
+    min-width: 50%;
+    font-size: 2vw;
+    p, .username-info{
+        @include displayFLex();
+        margin-top: 2vh;
+        background-color: $color_level_one;
+        min-height: 30vh;
+        min-width: 40vw;
+        text-align: center;
+    }
+
+    .username-info{
+        min-height: 15vh;
     }
 }
 
@@ -358,7 +418,6 @@ hr{
     }
 }
 
-
 @media screen and (max-width: 767px) and (min-width: 481px){
     label, p, a, h1, input, button, h4{
         font-size: 3vw;
@@ -377,15 +436,4 @@ hr{
         }
     }
 
-}
-
-.footer{
-    img{
-        height: 2.5vh;
-        width: auto;
-        filter: invert(1);
-    }
-    div{
-        padding-left: 1vw;
-    }
 }

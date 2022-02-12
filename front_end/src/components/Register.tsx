@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import URLs from '../ApiURLs';
 import { UserContext } from '../UserContext';
 import { userInfoContextType } from '../TypeInterfaces';
+import { match } from 'assert';
 
 const Register = () => {
     const [enteredUsername, setEnteredUsername] = useState('');
@@ -24,37 +25,60 @@ const Register = () => {
             setLoginMessage('You need to enter an email!');
             return false;
         }
-        let temp = email.split('@');
-        if (temp.length!=2){
-            setLoginMessage('Entered email has to be correct!');
+        else if(!email.match(/^[a-z0-9]+@[a-z]+\.[a-z]+$/)){
+            setLoginMessage('Entered email has to be correct!')
             return false;
         }
-
-        temp = temp[1].split('.');
-        if (temp.length!=2){
-            setLoginMessage('Entered email has to be correct!');
-            return false;
-        }
-
         return true;
     }
 
-    // TODO: more rigorous checking
     const validateUsername = (username: string): boolean => {
-        if (username.length <7 ){
-            setLoginMessage('Username must be at least 7 characters long!')
+        if(username.length == 0){
+            setLoginMessage('Username is required!');
+            return false;
+        }
+        else if (username.length <5 ){
+            setLoginMessage('Username must be at least 5 characters long!')
+            return false;
+        }
+        else if(username.match(/^[a-zA-Z]+$/)){
+            setLoginMessage('Username must contain a number!');
+            return false;
+        }
+        else if(username.match(/^[0-9]+$/)){
+            setLoginMessage('Username must contain a letter!');
             return false;
         }
         return true;
     }
 
     const validatePassword = (password: string): boolean => {
-        if(password.length < 7){
+        if(password.length == 0){
+            setLoginMessage('Password is required!');
+            return false;
+        }
+        else if(password.length < 7){
             setLoginMessage('Password must be at least 7 characters long!');
+            return false;
+        }
+        else if(!(password.toUpperCase() != password)){ // check for lower case letters
+            setLoginMessage('Password requires at least one lower case letter!');
+            return false;
+        }
+        else if(!(password.toLowerCase() != password)){ // check for upper case letters
+            setLoginMessage('Password requires at least one upper case letter!');
+            return false;
+        }
+        else if(password.match(/^[a-zA-Z]+$/)){
+            setLoginMessage('Password must have a number!');
             return false;
         }
         return true;
     }
+
+    useEffect(() => {
+
+    }, [enteredPassword]);
 
     const registerOnClick = async () =>{
         setLoginMessage('');
@@ -102,6 +126,8 @@ const Register = () => {
             <div className='register-form'>
                     <h1 className="login-h">Sign up</h1> 
 
+                    <div className='message-div'></div>
+
                     <p className="message">{loginMessage}</p>
 
                     <div className="input-field">
@@ -109,7 +135,7 @@ const Register = () => {
                     </div>
 
                     <div className="input-field">
-                        <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>
+                        <input placeholder="Password" className="password-input" type="password" value={enteredPassword} onChange={(e: React.ChangeEvent<HTMLInputElement>)=> {setEnteredPassword(e.currentTarget.value)}}/>       
                     </div>
 
                     <div className='input-field'>
@@ -127,6 +153,22 @@ const Register = () => {
                     </div>
                     
                 </div>
+
+                <div className='password-info'>
+                    
+                        <p className='username-info'>
+                            Username must have minimum 5 characters <br />
+                        </p>
+                        
+                        <p>
+                            Password must contain the following:<br />
+                                -A lower case leter <br />
+                                -A capital (uppercase) letter <br />
+                                -A number <br />
+                                -Minimum 7 characters <br />
+                        </p>
+                        
+                    </div>
             </div>
     );
 }

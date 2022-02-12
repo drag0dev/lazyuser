@@ -82,7 +82,7 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  height: 50%;
+  height: 60%;
 }
 
 .form-wrapper-div .login-form div, .form-wrapper-div .login-form p, .form-wrapper-div .login-form h1, .form-wrapper-div .register-form div, .form-wrapper-div .register-form p, .form-wrapper-div .register-form h1 {
@@ -102,6 +102,11 @@ html {
 
 .form-wrapper-div .login-form p, .form-wrapper-div .register-form p {
   text-align: center;
+}
+
+.form-wrapper-div .login-form input, .form-wrapper-div .register-form input {
+  margin-bottom: 1vh;
+  margin-top: 1vh;
 }
 
 .form-wrapper-div .forgot-form {
@@ -476,7 +481,7 @@ hr {
   color: #C5C6C7;
 }
 
-.form-wrapper .form-div {
+.form-wrapper .change-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -485,12 +490,65 @@ hr {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  width: 100%;
-  margin-bottom: 3vh;
-  justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 50%;
+  height: 75%;
+  text-align: center;
 }
 
-.form-wrapper .form-div input {
+.form-wrapper .change-form button {
+  margin-left: 5vw;
+}
+
+.form-wrapper .password-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  max-width: 50%;
+  font-size: 2vw;
+  color: #66FCF1;
+}
+
+.form-wrapper .password-info p {
+  background-color: #0B0C10;
+}
+
+.form-wrapper .change-form .form-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  margin-bottom: 2vh;
+}
+
+.form-wrapper .change-form .form-div input {
   margin-left: 1vw;
   background-color: #1F2833;
   color: #C5C6C7;
@@ -556,6 +614,56 @@ hr {
   margin-left: 1vw;
 }
 
+.footer img {
+  height: 2.5vh;
+  width: auto;
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.footer div {
+  padding-left: 1vw;
+}
+
+.password-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-width: 50%;
+  font-size: 2vw;
+}
+
+.password-info p, .password-info .username-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 2vh;
+  background-color: #0B0C10;
+  min-height: 30vh;
+  min-width: 40vw;
+  text-align: center;
+}
+
+.password-info .username-info {
+  min-height: 15vh;
+}
+
 @media screen and (max-width: 480px) {
   label, p, a, h1, input, button, h4 {
     font-size: 4vw;
@@ -592,16 +700,5 @@ hr {
   .deals-div a {
     margin-left: 5vw;
   }
-}
-
-.footer img {
-  height: 2.5vh;
-  width: auto;
-  -webkit-filter: invert(1);
-          filter: invert(1);
-}
-
-.footer div {
-  padding-left: 1vw;
 }
 /*# sourceMappingURL=App.css.map */

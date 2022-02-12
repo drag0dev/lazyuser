@@ -11,7 +11,7 @@ const ForgotPW = () => {
     const userInfo: userInfoContextType = useContext(UserContext);
 
    useEffect(() => {
-        if(!userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
+        if(userInfo.userInfo.logged && !userInfo.userInfo.loading)navigate('/');
     }, [userInfo.userInfo.logged, userInfo.userInfo.loading]);
 
 
@@ -20,24 +20,16 @@ const ForgotPW = () => {
             setMessage('You need to enter an email!');
             return false;
         }
-        let temp = email.split('@');
-        if (temp.length!=2){
-            setMessage('Entered email has to be correct!');
+        else if(!email.match(/^[a-z0-9]+@[a-z]+\.[a-z]+$/)){
+            setMessage('Entered email has to be correct!')
             return false;
         }
-
-        temp = temp[1].split('.');
-        if (temp.length!=2){
-            setMessage('Entered email has to be correct!');
-            return false;
-        }
-
         return true;
     }
 
     const handleChangesOnServer = async (newField: string) => {
         let body: string;
-        if(newField.includes('@')) body = JSON.stringify({email: newField});
+        if(newField.includes('@')) body = JSON.stringify({username: newField});
         else body = JSON.stringify({username: newField});
 
         let res = await fetch(URLs.urlForgot, {
