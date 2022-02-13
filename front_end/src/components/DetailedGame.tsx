@@ -115,31 +115,28 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
         <div className='detailed-game-div' ref={detailDivRef} >
             {detailedGamesInfo.map((game, index) => (
                 <div key={`detailed-game-${game.info.title}`} className='detailed-games'>
-                    <img src={game.info.thumb} className='big-image'/>
 
-                    <p className='description-p'>
-                        Name: {game.info.title}
-                        <br />
-                        Cheapest: ${game.cheapestPriceEver.price} ({game.cheapestPriceEver.date}.)
-                    </p>
+                    <div className='detailed-game-description'>
+                        <img src={game.info.thumb} className='big-image'/>
 
-                    <button onClick={(e: React.MouseEvent<HTMLElement>) => followOnClick(e)} className={`follow-button-${gameId[index]}`} key={`follow-button-${game.info.title}`}>{userInfo.userInfo.games?.includes(gameId[index]) ? 'Unfollow' : 'Follow'}</button>
+                        <p className='description-p'>
+                            Name: {game.info.title}
+                            <br />
+                            Cheapest: ${game.cheapestPriceEver.price} ({game.cheapestPriceEver.date}.)
+                        </p>
 
+                        <button onClick={(e: React.MouseEvent<HTMLElement>) => followOnClick(e)} className={`follow-button-${gameId[index]}`} key={`follow-button-${game.info.title}`}>{userInfo.userInfo.games?.includes(gameId[index]) ? 'Unfollow' : 'Follow'}</button>
+                    </div>
+                    
                     <div className='deals-div' key={`game-${index}`}>
                         {game.deals.map((deal)=>(
                             <a href={CheapSharkURLs.deal.replace('placeholder', deal.dealID)} target='_blank' key={deal.dealID}>
                             <br/>
                             <img src={CheapSharkURLs.default + storesInfo[parseInt(deal.storeID)-1].images.icon}></img>
-                            <br/>
-                            <p>{storesInfo[parseInt(deal.storeID)-1].storeName}</p>
-                            <br />
-                            <p>{`Discount: ${parseInt(deal.savings).toFixed(0)}%`}</p>
-                            <br />
-                            <p>{`Price: $${deal.price}`}</p>
+                            <p>{`$${deal.price} (${parseInt(deal.savings).toFixed(0)}%)`}</p>
                         </a>
                         ))}
                     </div>
-                    {index+1 != detailedGamesInfo.length && <hr/>}
                 </div>
             ) ) }
         </div>

@@ -211,13 +211,13 @@ a:focus, a, a:active{
     width: 100%;
     @include displayFLex();
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
     background-color: $color_level_two;
     color: $color_text;
     min-height: 41vh;
-    padding-top: 2.5vh;
-    padding-bottom: 2.5vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 
     button{
         @include button();
@@ -231,25 +231,45 @@ a:focus, a, a:active{
         background-color: $color_level_two;
         color: $color_text;
         width: 100%;
-        padding-top: 3vh;
-        padding-bottom: 3vh;
+        margin-bottom: 1vh; 
+        height: 50vh;
+
         a{
+            font-size: 1vw;
             width: 25%;
             margin-top: 1vh;
         }
     }
 
     .detailed-games{
+        border: 3px solid $color_level_one;
         @include displayFLex();
-        width: 100%;
+        width: 50%;
         flex-wrap: wrap;
         flex-direction: row;
-        .big-image{
-            padding-left: 2.5vw;
-            padding-right: 2.5vw;
-            min-width: 20%;
-            max-width: 35%;
-            height: auto;
+        margin-bottom: 1vh;
+        
+        .detailed-game-description{
+            @include displayFLex();
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            
+            .big-image{
+                width: 100%;
+                margin-left: 2.5vw;
+                margin-right: 2.5vw;
+                max-width: 25%;
+                height: auto;
+                margin-bottom: 2vh;
+                margin-top: 2vh;
+            }
+
+            p{
+                width: 100%;
+                margin-bottom: 2vh;
+            }
+            
         }
     } 
 }
@@ -386,7 +406,7 @@ hr{
 
 @media screen and (max-width: 480px){
     label, p, a, h1, input, button, h4{
-        font-size: 4vw;
+        font-size: 3.5vw;
     }
 
     .results-div div{
@@ -398,15 +418,20 @@ hr{
     }
 
     .detailed-games{
-        .big-image, .description-p, button[class^="follow-button-"]{
-            width: 50%;
-            margin-top: 1vh;
+        min-width: 100%;
+        min-height: 50vh;   
+        .deals-div{
+            justify-content: space-evenly;
         }
-    }
 
-    .deals-div{
-        a{
-            margin-left: 10vw;
+        .detailed-game-description{    
+            .description-p, button[class^="follow-button-"]{
+                width: 50%;
+                margin-top: 1vh;
+            }
+        .big-image{
+            min-width: 25vw;
+        }
         }
     }
 
@@ -416,23 +441,60 @@ hr{
         }
         text-align: right;
     }
+
+    .form-wrapper{
+        .change-form{
+            width: 48%;
+            margin-left: 2vw;
+            .form-div{
+                @include displayFLex();
+                flex-wrap: wrap;
+                flex-direction: row;
+                p{
+                    width: 100%;
+                }
+            }
+        }
+        .password-info{
+            width: 40%;
+            p{
+                width: 40%;
+            }
+        }
+    }
+
+    .form-wrapper-div{
+        .password-info{
+            width: 40%;
+            p{
+                width: 40%;
+            }
+        }
+        .register-form{
+            .login-message-div{
+                p{
+                    text-align: center;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 767px) and (min-width: 481px){
     label, p, a, h1, input, button, h4{
-        font-size: 3vw;
+        font-size: 2.5vw;
     }
 
-     .detailed-games{
-        .big-image, .description-p, button[class^="follow-button-"]{
-            width: 50%;
-            margin-top: 1vh;
+    .detailed-games{
+        min-height: 100vh;   
+        .detailed-game-description{    
+            .description-p, button[class^="follow-button-"]{
+                width: 50%;
+                margin-top: 1vh;
+            }
+        .big-image{
+            min-width: 25vw;
         }
-    }
-
-    .deals-div{
-        a{
-            margin-left: 5vw;
         }
     }
 

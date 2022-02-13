@@ -51,6 +51,9 @@ const Settings = () => {
 
                 <div>
                     <p>Email: {userInfo.userInfo.email} {userInfo.userInfo.emailVerified ? '(Verified)' : '(Unverified)'}</p>
+                </div>
+                
+                <div>
                     <button onClick={() => navigate('/changeemail')}>Change your email</button>
                     {!userInfo.userInfo.emailVerified && <button onClick={onClickVerify}>Verify your email</button>}
                 </div>

@@ -336,16 +336,16 @@ a:focus, a, a:active {
       justify-content: space-around;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   text-align: center;
   background-color: #1F2833;
   color: #C5C6C7;
   min-height: 41vh;
-  padding-top: 2.5vh;
-  padding-bottom: 2.5vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 .detailed-game-div button {
@@ -374,16 +374,18 @@ a:focus, a, a:active {
   background-color: #1F2833;
   color: #C5C6C7;
   width: 100%;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
+  margin-bottom: 1vh;
+  height: 50vh;
 }
 
 .detailed-game-div .deals-div a {
+  font-size: 1vw;
   width: 25%;
   margin-top: 1vh;
 }
 
 .detailed-game-div .detailed-games {
+  border: 3px solid #0B0C10;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -392,7 +394,28 @@ a:focus, a, a:active {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  width: 100%;
+  width: 50%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 1vh;
+}
+
+.detailed-game-div .detailed-games .detailed-game-description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: horizontal;
@@ -401,12 +424,19 @@ a:focus, a, a:active {
           flex-direction: row;
 }
 
-.detailed-game-div .detailed-games .big-image {
-  padding-left: 2.5vw;
-  padding-right: 2.5vw;
-  min-width: 20%;
-  max-width: 35%;
+.detailed-game-div .detailed-games .detailed-game-description .big-image {
+  width: 100%;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+  max-width: 25%;
   height: auto;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+}
+
+.detailed-game-div .detailed-games .detailed-game-description p {
+  width: 100%;
+  margin-bottom: 2vh;
 }
 
 hr {
@@ -666,7 +696,7 @@ hr {
 
 @media screen and (max-width: 480px) {
   label, p, a, h1, input, button, h4 {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
   .results-div div {
     width: 50%;
@@ -674,12 +704,21 @@ hr {
   .jump-div button {
     margin-left: 3vw;
   }
-  .detailed-games .big-image, .detailed-games .description-p, .detailed-games button[class^="follow-button-"] {
+  .detailed-games {
+    min-width: 100%;
+    min-height: 50vh;
+  }
+  .detailed-games .deals-div {
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+  }
+  .detailed-games .detailed-game-description .description-p, .detailed-games .detailed-game-description button[class^="follow-button-"] {
     width: 50%;
     margin-top: 1vh;
   }
-  .deals-div a {
-    margin-left: 10vw;
+  .detailed-games .detailed-game-description .big-image {
+    min-width: 25vw;
   }
   .userInteractionNavBar {
     text-align: right;
@@ -687,18 +726,59 @@ hr {
   .userInteractionNavBar div {
     width: 100%;
   }
+  .form-wrapper .change-form {
+    width: 48%;
+    margin-left: 2vw;
+  }
+  .form-wrapper .change-form .form-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .form-wrapper .change-form .form-div p {
+    width: 100%;
+  }
+  .form-wrapper .password-info {
+    width: 40%;
+  }
+  .form-wrapper .password-info p {
+    width: 40%;
+  }
+  .form-wrapper-div .password-info {
+    width: 40%;
+  }
+  .form-wrapper-div .password-info p {
+    width: 40%;
+  }
+  .form-wrapper-div .register-form .login-message-div p {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 767px) and (min-width: 481px) {
   label, p, a, h1, input, button, h4 {
-    font-size: 3vw;
+    font-size: 2.5vw;
   }
-  .detailed-games .big-image, .detailed-games .description-p, .detailed-games button[class^="follow-button-"] {
+  .detailed-games {
+    min-height: 100vh;
+  }
+  .detailed-games .detailed-game-description .description-p, .detailed-games .detailed-game-description button[class^="follow-button-"] {
     width: 50%;
     margin-top: 1vh;
   }
-  .deals-div a {
-    margin-left: 5vw;
+  .detailed-games .detailed-game-description .big-image {
+    min-width: 25vw;
   }
 }
 /*# sourceMappingURL=App.css.map */
