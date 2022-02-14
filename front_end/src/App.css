@@ -65,6 +65,18 @@ html {
           align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.form-wrapper-div .form-wrapper-header {
+  margin-top: 2vh;
+  text-align: center;
+  width: 100%;
 }
 
 .form-wrapper-div .login-form, .form-wrapper-div .register-form {
@@ -82,6 +94,7 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  width: 50%;
   height: 60%;
 }
 
@@ -124,6 +137,7 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  width: 50%;
   height: 30%;
 }
 
@@ -511,6 +525,12 @@ hr {
   color: #C5C6C7;
 }
 
+.form-wrapper .form-wrapper-header {
+  text-align: center;
+  margin-top: 2vh;
+  width: 100%;
+}
+
 .form-wrapper .change-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -553,12 +573,14 @@ hr {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  max-width: 50%;
+  max-width: 45%;
   font-size: 2vw;
+  width: 50%;
   color: #66FCF1;
 }
 
 .form-wrapper .password-info p {
+  width: 100%;
   background-color: #0B0C10;
 }
 
@@ -670,7 +692,7 @@ hr {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  min-width: 50%;
+  max-width: 50%;
   font-size: 2vw;
 }
 
@@ -686,7 +708,7 @@ hr {
   margin-top: 2vh;
   background-color: #0B0C10;
   min-height: 30vh;
-  min-width: 40vw;
+  min-width: 40%;
   text-align: center;
 }
 
@@ -752,13 +774,27 @@ hr {
   .form-wrapper .password-info {
     width: 40%;
   }
-  .form-wrapper .password-info p {
-    width: 40%;
+  .form-wrapper-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .form-wrapper-div .form-wrapper-header {
+    text-align: center;
+    width: 100%;
   }
   .form-wrapper-div .password-info {
-    width: 40%;
-  }
-  .form-wrapper-div .password-info p {
     width: 40%;
   }
   .form-wrapper-div .register-form .login-message-div p {
@@ -779,6 +815,25 @@ hr {
   }
   .detailed-games .detailed-game-description .big-image {
     min-width: 25vw;
+  }
+  .form-wrapper .change-form .form-div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .form-wrapper .change-form .form-div p {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=App.css.map */

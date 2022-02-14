@@ -84,11 +84,13 @@ const ChangePassword = () => {
 
     return(
         <div className='form-wrapper'>
+
+            <div className='form-wrapper-header'>
+                <h1>Changing your password</h1>
+            </div>
+            
             <div className='change-form'>
 
-                <div className='form-div'>
-                    <h1>Changing your password</h1>
-                </div>
 
                 <div className='form-div'>
                     <p>{loginMessage}</p>

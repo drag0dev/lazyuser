@@ -123,9 +123,13 @@ const Register = () => {
 
     return(
         <div className='form-wrapper-div'>
-            <div className='register-form'>
+            
+                <div className='form-wrapper-header'>
                     <h1 className="login-h">Sign up</h1> 
-
+                </div>
+                    
+                <div className='register-form'>
+                    
                     <div className='message-div'></div>
 
                     <p className="message">{loginMessage}</p>

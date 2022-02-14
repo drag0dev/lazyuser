@@ -61,12 +61,20 @@ html{
     background-color: $color_level_two;
     color: $color_level_four;
     @include displayFLex();
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    .form-wrapper-header{
+        margin-top: 2vh;
+        text-align: center;
+        width: 100%;
+    }
 
     .login-form, .register-form{
         @include displayFLex();
         flex-wrap: wrap;
         flex-direction: row;
-
+        width: 50%;
         height: 60%;
         div ,p ,h1{
             width: 100%;
@@ -86,7 +94,7 @@ html{
         @include displayFLex();
         flex-wrap: wrap;
         flex-direction: row;
-
+        width: 50%;
         height: 30%;
 
         div, h1 {
@@ -307,6 +315,12 @@ hr{
     flex-direction: row;
     color: $color_text;
 
+    .form-wrapper-header{
+        text-align: center;
+        margin-top: 2vh;
+        width: 100%;
+    }
+
     .change-form{
         @include displayFLex();
         justify-content: center;
@@ -324,10 +338,12 @@ hr{
         @include displayFLex();
         flex-wrap: wrap;
         flex-direction: row;
-        max-width: 50%;
+        max-width: 45%;
         font-size: 2vw;
+        width: 50%;
         color: $color_level_four;
         p{
+            width: 100%;
             background-color: $color_level_one;
         }
     }
@@ -388,14 +404,14 @@ hr{
     @include displayFLex();
     flex-wrap: wrap;
     flex-direction: row;
-    min-width: 50%;
+    max-width: 50%;
     font-size: 2vw;
     p, .username-info{
         @include displayFLex();
         margin-top: 2vh;
         background-color: $color_level_one;
         min-height: 30vh;
-        min-width: 40vw;
+        min-width: 40%;
         text-align: center;
     }
 
@@ -458,17 +474,22 @@ hr{
         .password-info{
             width: 40%;
             p{
-                width: 40%;
             }
         }
+        
     }
 
     .form-wrapper-div{
+        @include displayFLex();
+        flex-wrap: wrap;
+        flex-direction: row;
+        .form-wrapper-header{
+            text-align: center;
+            width: 100%;
+        }
+
         .password-info{
             width: 40%;
-            p{
-                width: 40%;
-            }
         }
         .register-form{
             .login-message-div{
@@ -497,5 +518,16 @@ hr{
         }
         }
     }
-
+    .form-wrapper{
+        .change-form{
+            .form-div{
+                @include displayFLex();
+                flex-wrap: wrap;
+                flex-direction: row;
+                p{
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
