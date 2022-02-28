@@ -8,6 +8,3 @@
 
 # Lazy user
 Lazy user is a small web application that tracks game prices using cheapshark API. Front end was done in React with Typescript. Backend is a Node.js/Express API that is an interface for a Mongo database. It's fully functional so if you want to use it -> [click me](https://hardcore-raman-df6a8c.netlify.app/).
-
-## Why?
-I was bored and wanted to mess with new technologies and languages :D
