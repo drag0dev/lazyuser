@@ -3,12 +3,15 @@ import CheapSharkURLs from '../CheapSharkURLs';
 import React, {useEffect, useState, useRef, useContext} from 'react';
 import { UserContext } from '../UserContext';
 import { userInfoContextType, DetailedGameInterface, storesInfoInterface, gameInfoInterface} from '../TypeInterfaces';
+import { Link } from 'react-router-dom';
 
 const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) =>{
     const detailDivRef = useRef<HTMLDivElement>(null);
     const userInfo: userInfoContextType = useContext(UserContext);
     const [storesInfo, setStoresInfo] = useState<storesInfoInterface[]>([]);
     const [detailedGamesInfo, setDetailedGameInfo] = useState<gameInfoInterface[]>([]);
+    const popUpDiv = useRef<HTMLDivElement>(null);
+    const overlayDiv = useRef<HTMLDivElement>(null);
 
     const handleFollowServerSide = async (clickedId: string, follow: boolean = true) => {
         if(follow){
@@ -61,7 +64,27 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
         }
     }
 
+    const showPopUpDiv = () => {
+        if (overlayDiv.current && popUpDiv.current){
+            overlayDiv.current.className += ' active';
+            popUpDiv.current.className += ' active';
+        }
+    }
+
+    const closePopUpDiv = () => {
+       if (overlayDiv.current && popUpDiv.current){
+           overlayDiv.current.className = overlayDiv.current.className.replaceAll(' active', '');
+           popUpDiv.current.className = popUpDiv.current.className.replaceAll(' active', '');
+       } 
+    }
+
     const followOnClick = (e:React.MouseEvent<HTMLElement>) => {
+        //check if the user is loggied, if not popup for login
+        if (!userInfo.userInfo.logged){
+            showPopUpDiv(); 
+            return;
+        }
+
         const className = e.currentTarget.className.split('-')[2];
 
         if (userInfo.userInfo.games.includes(className)){ // if game is followed  
@@ -113,6 +136,25 @@ const DetailedGame = ({gameId, setGameId, getUserGames}: DetailedGameInterface) 
 
     return(
         <div className='detailed-game-div' ref={detailDivRef} >
+            <div ref={overlayDiv} className='login-overlay' onClick={closePopUpDiv}></div>
+            <div ref={popUpDiv} className='login-popup'>
+
+                <div>
+                    <button onClick={closePopUpDiv}>&times;</button>
+
+                    <p>
+                        In order to follow a game you need to be logged in.
+                    </p>
+                </div>
+
+                <div className='links'>
+                    <Link to='/login' onClick={closePopUpDiv}>Login</Link>
+                    <Link to='/register' onClick={closePopUpDiv}>Register</Link>
+                </div>
+
+            </div>
+
+
             {detailedGamesInfo.map((game, index) => (
                 <div key={`detailed-game-${game.info.title}`} className='detailed-games'>
 
