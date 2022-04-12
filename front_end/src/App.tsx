@@ -36,10 +36,20 @@ function App() {
       loading: true 
     });
 
-    let res = await fetch(URLs.urlCheckLogin, {
+    let res: Response;
+    try{
+    res = await fetch(URLs.urlCheckLogin, {
         method: 'POST',
-        credentials: 'include'
-    });
+          credentials: 'include'
+      });
+    }catch{
+      setUserInfo({
+        ...userInfo,
+        loading: false
+      });
+      return;
+    }
+
     if(res.status==200){ // if the session is valid
         let data;
         data = await res.json();
